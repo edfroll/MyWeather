@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode — личные настройки пользователя
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Сборка
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# Swift Package Manager
+.build/
+.swiftpm/

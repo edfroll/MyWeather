@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2BBA87A0304C74E100AA5491 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA879F304C74E100AA5491 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2BBA8781304C3E0D00AA5491 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		2BBA8771304C3E0C00AA5491 /* MyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBA8780304C3E0D00AA5491 /* MyWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBA878A304C3E0D00AA5491 /* MyWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BBA879F304C74E100AA5491 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		2BBA8768304C3E0C00AA5491 = {
 			isa = PBXGroup;
 			children = (
+				2BBA879F304C74E100AA5491 /* .gitignore */,
 				2BBA8773304C3E0C00AA5491 /* MyWeather */,
 				2BBA8783304C3E0D00AA5491 /* MyWeatherTests */,
 				2BBA878D304C3E0D00AA5491 /* MyWeatherUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BBA87A0304C74E100AA5491 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
