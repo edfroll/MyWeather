@@ -9,8 +9,8 @@
 
 | # | Этап | Где | Выход | Статус |
 |---|---|---|---|---|
-| 1 | Сверка Open-Meteo | облако | `docs/open-meteo-api.md` | ✅ 13.10, развилки OM-1…3 ждут Edward |
-| 2 | Harness-0 | облако | `CLAUDE.md`, `.claude/skills/architect`, `.claude/skills/critic` | следующий |
+| 1 | Сверка Open-Meteo | облако | `docs/open-meteo-api.md` | ✅ 13.10, развилки OM-1…3 решены 14.10 |
+| 2 | Harness-0 | облако | `CLAUDE.md`, `.claude/skills/mw-architect`, `.claude/skills/mw-critic` | следующий |
 | 3 | Архитектор | облако | `docs/architecture.md` | после 2 и OM-1…3 |
 | 4 | Критик (отдельная сессия, без контекста архитектора) → правки | облако | `docs/architecture-review.md`, закрытая спека | — |
 | 3–4 ‖ | Проект Harness-1 | штаб (claude.ai) | `docs/harness.md` | параллельно с 3–4 |
