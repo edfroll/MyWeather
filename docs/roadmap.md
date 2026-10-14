@@ -13,7 +13,7 @@
 | 2 | Harness-0 | облако | `CLAUDE.md`, `.claude/skills/mw-architect`, `.claude/skills/mw-critic`, `.claude/settings.json` | ✅ 14.10, PR #1 |
 | 3 | Архитектор | облако | `docs/architecture.md` | следующий — после правок продукта по OM-1…3 |
 | 4 | Критик (отдельная сессия, без контекста архитектора) → правки | облако | `docs/architecture-review.md`, закрытая спека | — |
-| 3–4 ‖ | Проект Harness-1 | штаб (claude.ai) | `docs/harness.md` | начат 14.10, шаг 1: проверка коннектора Atlassian |
+| 3–4 ‖ | Проект Harness-1 | штаб (claude.ai) | `docs/harness.md` | начат 14.10: `harness.md` создан, шаг 1 — проверка коннектора Atlassian |
 | 5 | Инфраструктура = пилот конвейера | Mac | GitHub Actions, SwiftLint, SwiftFormat, отлаженный цикл | после 4 и Harness-1 |
 | 6 | Нарезка на MW | облако | эпики и задачи в Jira | после 5 |
 | 7 | Исполнение | Mac (+облако для ревью) | — | — |
