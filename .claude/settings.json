@@ -3,5 +3,17 @@
     "commit": "",
     "pr": "",
     "sessionUrl": false
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ \"$CLAUDE_CODE_REMOTE\" = true ] && git -C \"$CLAUDE_PROJECT_DIR\" config --local commit.gpgsign false || true"
+          }
+        ]
+      }
+    ]
   }
 }
