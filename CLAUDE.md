@@ -43,6 +43,7 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 | Архитектор фундамента (один раз) | `.claude/skills/mw-global-architect/SKILL.md` | Opus 5.5 |
 | Критик фундамента (один раз) | `.claude/skills/mw-global-critic/SKILL.md` | Opus 5.5 |
 | Архитектор, критик, researcher, ревьюер тикета | `mw-architect`, `mw-critic`, `mw-researcher`, `mw-review` (бэклог) | Opus 5.5 |
+| Ревизия архитектуры в конце спринта | `mw-architect-review` (MW-4) | Opus 5.5 |
 | Исполнитель | `mw-executor` (бэклог) | Sonnet 5.5 |
 
 Конвейер по классу тикета — harness §5, ревью — harness §6.
@@ -77,7 +78,7 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 - Точки Edward: развилки (large; продуктовые вопросы standard), аппрув PR (Enable auto-merge),
   проверка на устройстве, релиз. Стопа «перед коммитом» нет (harness §5).
 - Одна сессия — одна роль или один тикет.
-- Лимиты: при 50% пятичасового или недельного окна — стоп и вопрос Edward (harness §8).
+- Лимиты: при 50% пятичасового окна — стоп и вопрос Edward. Недельное окно Edward контролирует сам (harness §8).
 
 ## Память
 
