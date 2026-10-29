@@ -16,7 +16,8 @@
 |---|---|---|
 | `CLAUDE.md` | корень репозитория | v2 |
 | Этот документ | `docs/harness.md` | v2 |
-| Скиллы ролей | `.claude/skills/mw-*` | фундамент ✅; рутинные — бэклог §10 |
+| Скиллы ролей | `.claude/skills/mw-*` — копии ролей `edfroll/claude-sync` + дельта MW | фундамент ✅; рутинные — бэклог §10 |
+| Инженерные принципы | `docs/engineering-principles.md` — копия `claude-sync/core/rules/` | ✅ 29.10.2026 |
 | Разрешения | `.claude/settings.json` | v2 (§7) |
 | Хуки | `.claude/settings.json` + `.claude/hooks/` | бэклог §10 |
 | Project instructions | настройки проекта claude.ai | Edward, по §1.3 |
@@ -251,22 +252,26 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 
 ## 10. Скиллы
 
-| Скилл | Для чего | Состояние |
-|---|---|---|
-| `mw-global-architect` | спека фундамента `docs/architecture.md`, один раз | ✅ (бывший `mw-architect`) |
-| `mw-global-critic` | разбор спеки фундамента, один раз | ✅ (бывший `mw-critic`) |
-| `swiftui-pro` | справочник SwiftUI (база iOS 27 — сверять с iOS 17) | ✅ вендорен |
-| `mw-architect` | спека тикета standard/large | бэклог |
-| `mw-critic` | критика спеки тикета | бэклог |
-| `mw-researcher` | факты перед архитектором | MW-5 |
-| `mw-review` | ревью круга 1 и круга 2 | бэклог |
-| `mw-executor` | исполнение тикета на Mac | бэклог |
-| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта: структура, антипаттерны, сводка структурных изменений; отдельный скилл, не режим `mw-global-architect` | MW-4 |
-| хуки §7.2 | — | бэклог |
+**Источник ролей — `edfroll/claude-sync`** (решено Edward 29.10.2026, тред «Перемоделировать скиллы в claude-sync»,
+план `/mnt/project-files/claude-sync/remodel-plan.md` П4). Скилл `mw-*` = копия роли из claude-sync с источником и
+датой + дельта MW (этот документ, `CLAUDE.md`). Общее правило правится в claude-sync, затем копия обновляется; здесь
+меняется только дельта MW.
 
-Основа для `mw-architect` и `mw-critic` — структура личных скиллов Edward `architect`/`critic`
-(репозиторий `edfroll/claude-sync`): две фазы архитектора с явным переходом, «очевидное — презентуй, спорное —
-развилка», критик читает спеку как исполнитель без переписки, вердикт. Содержимое — своё, под стек MyWeather.
+| Скилл | Для чего | Источник в claude-sync | Состояние |
+|---|---|---|---|
+| `mw-global-architect` | спека фундамента `docs/architecture.md`, один раз | `workflows/own/foundation/global-architect.md` (обобщён из этого скилла) | ✅ |
+| `mw-global-critic` | разбор спеки фундамента, один раз | `workflows/own/foundation/global-critic.md` (обобщён из этого скилла) | ✅ |
+| `swiftui-pro` | справочник SwiftUI (база iOS 27 — сверять с iOS 17) | `core/skills/swiftui-pro` | ✅ копия 29.10.2026 |
+| `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | MW-5 |
+| `mw-architect` | спека тикета standard/large | `core/roles/architect.md` | MW-6 |
+| `mw-critic` | критика спеки тикета | `core/roles/critic.md` | MW-7 |
+| `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | MW-8 |
+| `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | MW-9 |
+| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | MW-4 |
+| хуки §7.2 | — | — | бэклог |
+
+Дельта собственного проекта ко всем ролям — `workflows/own/ticket/overlay.md`; принципы P1–P14 и их поднаборы по
+ролям — `docs/engineering-principles.md`.
 
 ## 11. Открытые вопросы
 

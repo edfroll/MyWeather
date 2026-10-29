@@ -2,10 +2,26 @@
 name: swiftui-pro
 description: Comprehensively reviews SwiftUI code for best practices on modern APIs, maintainability, and performance. Use when reading, writing, or reviewing SwiftUI projects.
 license: MIT
-argument-hint: "[focus area]"
 metadata:
   author: Paul Hudson
   version: "2.0.0"
+---
+
+> Копия `edfroll/claude-sync` → `core/skills/swiftui-pro` (main `5955891`, 29.10.2026). Правки — там, затем обновить копию.
+
+## Local overrides
+
+- Project rules (CLAUDE.md, .claude/rules, memory) take precedence over this skill.
+- Do not add explanatory or documentation comments; the hygiene.md comment rule does not apply.
+- Treat file-splitting (one type per file, extracting `some View` helpers) and swift.md style preferences as optional suggestions, not findings, unless the project already follows them.
+- Do not suggest other twostraws skills.
+- The project's deployment target overrides the Core Instructions below. Recommend API newer than that target only behind `#available` with a fallback; advice that lacks a fallback is a suggestion, not a finding.
+- If the project bans a kind of modifier or technique (for example, accessibility modifiers), skip the matching reference instead of reporting its absence.
+
+Everything below this section is upstream content kept verbatim, so the skill can be updated with a plain diff against twostraws/SwiftUI-Agent-Skill. Do not rewrite it; local changes go only in this section.
+
+If you find a flaw in the author's guidance or a conflict with Edward's rules while using this skill, report it to Edward immediately and propose a fix, such as a new override line here. A flaw includes material the model already knows, or knows better than the author, since it only spends context or pulls toward a worse answer.
+
 ---
 
 Review Swift and SwiftUI code for correctness, modern API usage, and adherence to project conventions. Report only genuine problems – do not nitpick or invent issues.
@@ -14,21 +30,21 @@ Include deprecated API in review findings. During feature work or bug fixes, com
 
 Review process:
 
-1. Check for deprecated API using `${CLAUDE_SKILL_DIR}/references/api.md`.
-1. Check that views, modifiers, and animations have been written optimally using `${CLAUDE_SKILL_DIR}/references/views.md`.
-1. Validate that data flow is configured correctly using `${CLAUDE_SKILL_DIR}/references/data.md`.
-1. Ensure navigation is updated and performant using `${CLAUDE_SKILL_DIR}/references/navigation.md`.
-1. Ensure the code uses designs that are accessible and compliant with Apple's Human Interface Guidelines using `${CLAUDE_SKILL_DIR}/references/design.md`.
-1. Review layout behavior as windows resize, including iPad multitasking and folding iPhone Duo, using `${CLAUDE_SKILL_DIR}/references/resizability.md`.
-1. Validate accessibility compliance including Dynamic Type, VoiceOver, and Reduce Motion using `${CLAUDE_SKILL_DIR}/references/accessibility.md`.
-1. Check localized text, formatting, and resource handling using `${CLAUDE_SKILL_DIR}/references/localization.md`.
-1. Ensure the code is able to run efficiently using `${CLAUDE_SKILL_DIR}/references/performance.md`.
-1. Quick validation of Swift code using `${CLAUDE_SKILL_DIR}/references/swift.md`.
-1. Final code hygiene check using `${CLAUDE_SKILL_DIR}/references/hygiene.md`.
+1. Check for deprecated API using `references/api.md`.
+1. Check that views, modifiers, and animations have been written optimally using `references/views.md`.
+1. Validate that data flow is configured correctly using `references/data.md`.
+1. Ensure navigation is updated and performant using `references/navigation.md`.
+1. Ensure the code uses designs that are accessible and compliant with Apple's Human Interface Guidelines using `references/design.md`.
+1. Review layout behavior as windows resize, including iPad multitasking and folding iPhone Duo, using `references/resizability.md`.
+1. Validate accessibility compliance including Dynamic Type, VoiceOver, and Reduce Motion using `references/accessibility.md`.
+1. Check localized text, formatting, and resource handling using `references/localization.md`.
+1. Ensure the code is able to run efficiently using `references/performance.md`.
+1. Quick validation of Swift code using `references/swift.md`.
+1. Final code hygiene check using `references/hygiene.md`.
 
 If doing a partial review, load only the relevant reference files.
 
-Keep `${CLAUDE_SKILL_DIR}/references/performance-plus.md` out of routine reviews. Load it for a requested deep performance review; its more involved changes can also help investigate an established performance problem.
+Keep `references/performance-plus.md` out of routine reviews. Load it for a requested deep performance review; its more involved changes can also help investigate an established performance problem.
 
 
 ## Core Instructions
@@ -86,7 +102,7 @@ Button("Add User", systemImage: "plus", action: addUser)
 // Before
 TextField("Username", text: Binding(
     get: { model.username },
-    set: { model.username = $0; model.save() }
+    set: { newValue in model.username = newValue; model.save() }
 ))
 
 // After
@@ -109,15 +125,15 @@ End of example.
 
 ## References
 
-- `${CLAUDE_SKILL_DIR}/references/accessibility.md` - Dynamic Type, VoiceOver, Reduce Motion, and other accessibility requirements.
-- `${CLAUDE_SKILL_DIR}/references/api.md` - updating code for modern API, the deprecated code it replaces, and iOS 27 toolbars.
-- `${CLAUDE_SKILL_DIR}/references/design.md` - guidance for building accessible apps that meet Apple's Human Interface Guidelines.
-- `${CLAUDE_SKILL_DIR}/references/hygiene.md` - making code compile cleanly and be maintainable in the long term.
-- `${CLAUDE_SKILL_DIR}/references/localization.md` - localizable text, resource bundles, and locale-aware presentation.
-- `${CLAUDE_SKILL_DIR}/references/navigation.md` - navigation using `NavigationStack`/`NavigationSplitView`, plus alerts, confirmation dialogs, and sheets.
-- `${CLAUDE_SKILL_DIR}/references/performance.md` - optimizing SwiftUI code for maximum performance.
-- `${CLAUDE_SKILL_DIR}/references/performance-plus.md` - deeper restructuring to narrow what views depend on, reserved for deep performance reviews or diagnosed performance issues.
-- `${CLAUDE_SKILL_DIR}/references/resizability.md` - changing window sizes, adaptive bars, safe areas, and iPhone Duo layouts.
-- `${CLAUDE_SKILL_DIR}/references/data.md` - data flow, shared state, and property wrappers.
-- `${CLAUDE_SKILL_DIR}/references/swift.md` - tips on writing modern Swift code, including using Swift Concurrency effectively.
-- `${CLAUDE_SKILL_DIR}/references/views.md` - view structure, composition, animation, reordering, and swipe actions.
+- `references/accessibility.md` - Dynamic Type, VoiceOver, Reduce Motion, and other accessibility requirements.
+- `references/api.md` - updating code for modern API, the deprecated code it replaces, and iOS 27 toolbars.
+- `references/design.md` - guidance for building accessible apps that meet Apple's Human Interface Guidelines.
+- `references/hygiene.md` - making code compile cleanly and be maintainable in the long term.
+- `references/localization.md` - localizable text, resource bundles, and locale-aware presentation.
+- `references/navigation.md` - navigation using `NavigationStack`/`NavigationSplitView`, plus alerts, confirmation dialogs, and sheets.
+- `references/performance.md` - optimizing SwiftUI code for maximum performance.
+- `references/performance-plus.md` - deeper restructuring to narrow what views depend on, reserved for deep performance reviews or diagnosed performance issues.
+- `references/resizability.md` - changing window sizes, adaptive bars, safe areas, and iPhone Duo layouts.
+- `references/data.md` - data flow, shared state, and property wrappers.
+- `references/swift.md` - tips on writing modern Swift code, including using Swift Concurrency effectively.
+- `references/views.md` - view structure, composition, animation, reordering, and swipe actions.
