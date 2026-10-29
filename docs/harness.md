@@ -267,7 +267,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `mw-critic` | критика спеки тикета | `core/roles/critic.md` | MW-7 |
 | `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | MW-8 |
 | `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | MW-9 |
-| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | MW-4 |
+| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | ✅ копия 29.10.2026 (MW-4) |
 | хуки §7.2 | — | — | бэклог |
 
 Дельта собственного проекта ко всем ролям — `workflows/own/ticket/overlay.md`; принципы P1–P14 и их поднаборы по
