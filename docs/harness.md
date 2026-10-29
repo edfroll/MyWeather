@@ -262,7 +262,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `mw-global-architect` | спека фундамента `docs/architecture.md`, один раз | `workflows/own/foundation/global-architect.md` (обобщён из этого скилла) | ✅ |
 | `mw-global-critic` | разбор спеки фундамента, один раз | `workflows/own/foundation/global-critic.md` (обобщён из этого скилла) | ✅ |
 | `swiftui-pro` | справочник SwiftUI (база iOS 27 — сверять с iOS 17) | `core/skills/swiftui-pro` | ✅ копия 29.10.2026 |
-| `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | MW-5 |
+| `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | ✅ копия 29.10.2026 (MW-5) |
 | `mw-architect` | спека тикета standard/large | `core/roles/architect.md` | MW-6 |
 | `mw-critic` | критика спеки тикета | `core/roles/critic.md` | MW-7 |
 | `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | MW-8 |
