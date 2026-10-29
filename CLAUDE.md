@@ -14,6 +14,7 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 | `docs/open-meteo-api.md` | факты API: эндпоинты, параметры, лимиты |
 | `docs/roadmap.md` | порядок этапов |
 | `docs/harness.md` | процесс: роли, Jira, ветки, ревью, защита |
+| `docs/engineering-principles.md` | P1–P14: что проверяет каждая роль; копия из `edfroll/claude-sync` |
 
 - Приоритет при расхождении: **продукт > UX > research**.
 - Ссылаться на документ и раздел явно: «продукт §6.4», «UX §9 п. 3», «research §7 №2».
