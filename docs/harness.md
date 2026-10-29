@@ -264,7 +264,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `swiftui-pro` | справочник SwiftUI (база iOS 27 — сверять с iOS 17) | `core/skills/swiftui-pro` | ✅ копия 29.10.2026 |
 | `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | MW-5 |
 | `mw-architect` | спека тикета standard/large | `core/roles/architect.md` | MW-6 |
-| `mw-critic` | критика спеки тикета | `core/roles/critic.md` | MW-7 |
+| `mw-critic` | критика спеки тикета | `core/roles/critic.md` | ✅ копия 29.10.2026 (MW-7) |
 | `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | MW-8 |
 | `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | MW-9 |
 | `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | MW-4 |
