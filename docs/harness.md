@@ -52,6 +52,25 @@ Jira» снято.
   тикетов — Edward. Свой PR в GitHub аппрувить нельзя — отсюда схема аппрувов §3.3.
 - Коннектор Atlassian видит только `myweather`; схему проекта (статусы, типы, поля) менять не умеет.
 
+**Переезд на личный аккаунт claude.ai, проверено 05.11.2026** (тред проекта «Проверить облачное окружение
+MyWeather»):
+
+- Проект перенесён с корпоративного аккаунта на личный, план тот же — Pro (§8).
+- Окружение `MyWeather` создано заново и стоит окружением проекта по умолчанию: переменные `GIT_AUTHOR_*` и
+  `GIT_COMMITTER_*` дают `Edward <edvard.froll@gmail.com>`, setup script ставит `commit.gpgsign=false`
+  (облако подписывает коммиты ключом инфраструктуры, GitHub показывает их Unverified), allowlist пропускает
+  домены Open-Meteo.
+- **Open-Meteo из облака ненадёжен:** `api` и `archive-api` отвечают 429 «Daily API request limit exceeded»
+  (общий исходящий IP облака), соединение с `api` иногда обрывается; `geocoding-api` — 200. Настройкой окружения
+  не лечится: в облаке тесты только на фикстурах, живые запросы — с Mac.
+- В проекте **один** репозиторий (`MyWeather`), поэтому `permissions` из `.claude/settings.json` в облачных
+  тредах применяются. `claude-sync` из проекта убран.
+- Облачный клон берёт ветку по умолчанию `main` (§3.1), а она отстаёт от `develop` до релиза. Поэтому Project
+  instructions требуют начинать тред с `git fetch origin develop && git switch develop`.
+- Коннектор Atlassian подключён заново, по-прежнему видит только `myweather`.
+- Mac: MacBook Air (bridge-окружение активно), личные правила и скиллы ставятся `claude-sync/bin/install.sh own`.
+  `.claude/settings.local.json` в `.gitignore`.
+
 ### 1.3 Где что живёт **[Edward]**
 
 | Слой | Что |
@@ -262,11 +281,11 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `mw-global-architect` | спека фундамента `docs/architecture.md`, один раз | `workflows/own/foundation/global-architect.md` (обобщён из этого скилла) | ✅ |
 | `mw-global-critic` | разбор спеки фундамента, один раз | `workflows/own/foundation/global-critic.md` (обобщён из этого скилла) | ✅ |
 | `swiftui-pro` | справочник SwiftUI (база iOS 27 — сверять с iOS 17) | `core/skills/swiftui-pro` | ✅ копия 29.10.2026 |
-| `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | MW-5 |
-| `mw-architect` | спека тикета standard/large | `core/roles/architect.md` | MW-6 |
-| `mw-critic` | критика спеки тикета | `core/roles/critic.md` | MW-7 |
-| `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | MW-8 |
-| `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | MW-9 |
+| `mw-researcher` | факты перед архитектором | `core/roles/researcher.md` | ✅ копия 29.10.2026 (MW-5) |
+| `mw-architect` | спека тикета standard/large | `core/roles/architect.md` + overlay | ✅ копия 29.10.2026 (MW-6) |
+| `mw-critic` | критика спеки тикета | `core/roles/critic.md` | ✅ копия 29.10.2026 (MW-7) |
+| `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | ✅ копия 29.10.2026 (MW-8) |
+| `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | ✅ копия 29.10.2026 (MW-9) |
 | `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | ✅ копия 29.10.2026 (MW-4) |
 | хуки §7.2 | — | — | бэклог |
 
