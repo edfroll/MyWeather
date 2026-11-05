@@ -52,6 +52,25 @@ Jira» снято.
   тикетов — Edward. Свой PR в GitHub аппрувить нельзя — отсюда схема аппрувов §3.3.
 - Коннектор Atlassian видит только `myweather`; схему проекта (статусы, типы, поля) менять не умеет.
 
+**Переезд на личный аккаунт claude.ai, проверено 05.11.2026** (тред проекта «Проверить облачное окружение
+MyWeather»):
+
+- Проект перенесён с корпоративного аккаунта на личный, план тот же — Pro (§8).
+- Окружение `MyWeather` создано заново и стоит окружением проекта по умолчанию: переменные `GIT_AUTHOR_*` и
+  `GIT_COMMITTER_*` дают `Edward <edvard.froll@gmail.com>`, setup script ставит `commit.gpgsign=false`
+  (облако подписывает коммиты ключом инфраструктуры, GitHub показывает их Unverified), allowlist пропускает
+  домены Open-Meteo.
+- **Open-Meteo из облака ненадёжен:** `api` и `archive-api` отвечают 429 «Daily API request limit exceeded»
+  (общий исходящий IP облака), соединение с `api` иногда обрывается; `geocoding-api` — 200. Настройкой окружения
+  не лечится: в облаке тесты только на фикстурах, живые запросы — с Mac.
+- В проекте **один** репозиторий (`MyWeather`), поэтому `permissions` из `.claude/settings.json` в облачных
+  тредах применяются. `claude-sync` из проекта убран.
+- Облачный клон берёт ветку по умолчанию `main` (§3.1), а она отстаёт от `develop` до релиза. Поэтому Project
+  instructions требуют начинать тред с `git fetch origin develop && git switch develop`.
+- Коннектор Atlassian подключён заново, по-прежнему видит только `myweather`.
+- Mac: MacBook Air (bridge-окружение активно), личные правила и скиллы ставятся `claude-sync/bin/install.sh own`.
+  `.claude/settings.local.json` в `.gitignore`.
+
 ### 1.3 Где что живёт **[Edward]**
 
 | Слой | Что |
