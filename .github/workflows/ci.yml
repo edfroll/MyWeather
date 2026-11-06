@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Matches Xcode on the developer's Mac; change together with it.
+  XCODE_VERSION: "27.0"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Select Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE="/Applications/Xcode_${XCODE_VERSION}.app"
+          if [ ! -d "$XCODE" ]; then
+            echo "Xcode $XCODE_VERSION not found on runner" >&2
+            exit 1
+          fi
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+
+      - name: Pick simulator
+        run: |
+          UDID=$(xcrun simctl list devices available iPhone | awk '/^-- /{ios = ($0 ~ /^-- iOS 27/)} ios' | grep -Eo '[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}' | head -n 1)
+          if [ -z "$UDID" ]; then
+            echo "No available iPhone simulator" >&2
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "Using simulator $UDID"
+          echo "SIM_UDID=$UDID" >> "$GITHUB_ENV"
+
+      - name: Build for testing
+        run: |
+          xcodebuild build-for-testing \
+            -project MyWeather.xcodeproj \
+            -scheme MyWeather \
+            -destination "platform=iOS Simulator,id=$SIM_UDID" \
+            -derivedDataPath build/DerivedData \
+            -resultBundlePath build/Build.xcresult \
+            -only-testing:MyWeatherTests \
+            -parallel-testing-enabled NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Run unit tests
+        run: |
+          xcodebuild test-without-building \
+            -project MyWeather.xcodeproj \
+            -scheme MyWeather \
+            -destination "platform=iOS Simulator,id=$SIM_UDID" \
+            -derivedDataPath build/DerivedData \
+            -resultBundlePath build/Test.xcresult \
+            -only-testing:MyWeatherTests \
+            -parallel-testing-enabled NO
+
+      - name: Upload result bundles
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: xcresult
+          path: build/*.xcresult
