@@ -43,9 +43,9 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 |---|---|---|
 | Архитектор фундамента (один раз) | `.claude/skills/mw-global-architect/SKILL.md` | Opus 5.5 |
 | Критик фундамента (один раз) | `.claude/skills/mw-global-critic/SKILL.md` | Opus 5.5 |
-| Архитектор, критик, researcher, ревьюер тикета | `mw-architect`, `mw-critic`, `mw-researcher`, `mw-review` (бэклог) | Opus 5.5 |
+| Архитектор, критик, researcher, ревьюер тикета | `mw-architect`, `mw-critic`, `mw-researcher`, `mw-review` (MW-5…MW-8) | Opus 5.5 |
 | Ревизия архитектуры в конце спринта | `mw-architect-review` (MW-4) | Opus 5.5 |
-| Исполнитель | `mw-executor` (бэклог) | Sonnet 5.5 |
+| Исполнитель | `mw-executor` (MW-9) | Sonnet 5.5 |
 
 Конвейер по классу тикета — harness §5, ревью — harness §6.
 

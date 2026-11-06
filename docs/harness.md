@@ -16,7 +16,7 @@
 |---|---|---|
 | `CLAUDE.md` | корень репозитория | v2 |
 | Этот документ | `docs/harness.md` | v2 |
-| Скиллы ролей | `.claude/skills/mw-*` — копии ролей `edfroll/claude-sync` + дельта MW | фундамент ✅; рутинные — бэклог §10 |
+| Скиллы ролей | `.claude/skills/mw-*` — копии ролей `edfroll/claude-sync` + дельта MW | ✅ все, список — §10 |
 | Инженерные принципы | `docs/engineering-principles.md` — копия `claude-sync/core/rules/` | ✅ 29.10.2026 |
 | Разрешения | `.claude/settings.json` | v2 (§7) |
 | Хуки | `.claude/settings.json` + `.claude/hooks/` | бэклог §10 |
