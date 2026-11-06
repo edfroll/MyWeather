@@ -16,7 +16,7 @@ JIRA = os.path.join(HOOKS, "jira_scope.py")
 COMMIT = os.path.join(HOOKS, "commit_guard.py")
 CLOUD = "7d0914d2-a05e-48d3-a0e5-46fe9e3870b9"
 GOOD = "168742523+edfroll@users.noreply.github.com"
-LEGACY = "edvard.froll@gmail.com"  # allowed during the MW-14 switch-over
+LEGACY = "edvard.froll@gmail.com"  # pre-MW-14 author, no longer allowed
 
 # The guards must not depend on the caller's git identity.
 GIT_ENV = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
@@ -147,10 +147,10 @@ class CommitGuard(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("author", err)
 
-    def test_legacy_author_passes_during_switch(self):
-        # MW-14: gmail stays allowed until the cloud environment and the Mac clone use noreply.
+    def test_legacy_author_blocked(self):
+        # MW-14: the switch-over is over, the old gmail author is blocked.
         self.set_email(LEGACY)
-        self.assertEqual(self.bash('git commit -m "MW-14: x"')[0], 0)
+        self.assertEqual(self.bash('git commit -m "MW-14: x"')[0], 2)
 
     def test_author_overrides(self):
         self.assertEqual(self.bash('git commit --author="Claude <noreply@anthropic.com>" -m x')[0], 2)
