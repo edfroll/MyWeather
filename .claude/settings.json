@@ -91,5 +91,29 @@
       "Bash(mkdir *)",
       "Bash(python3 docs/research/*)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*Atlassian.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/jira_scope.py\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|mcp__.*[Gg]it[Hh]ub.*__(push_files|create_or_update_file|delete_file|merge_pull_request)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/commit_guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
   }
 }
