@@ -60,7 +60,7 @@ MyWeather»):
 
 - Проект перенесён с корпоративного аккаунта на личный, план тот же — Pro (§8).
 - Окружение `MyWeather` создано заново и стоит окружением проекта по умолчанию: переменные `GIT_AUTHOR_*` и
-  `GIT_COMMITTER_*` дают `Edward <edvard.froll@gmail.com>`, setup script ставит `commit.gpgsign=false`
+  `GIT_COMMITTER_*` дают `Edward <168742523+edfroll@users.noreply.github.com>` (до MW-14, 06.11.2026, — `edvard.froll@gmail.com`), setup script ставит `commit.gpgsign=false`
   (облако подписывает коммиты ключом инфраструктуры, GitHub показывает их Unverified), allowlist пропускает
   домены Open-Meteo.
 - **Open-Meteo из облака ненадёжен:** `api` и `archive-api` отвечают 429 «Daily API request limit exceeded»
@@ -117,7 +117,11 @@ MyWeather»):
 
 ### 3.2 Коммиты
 
-- Автор — `Edward <edvard.froll@gmail.com>`. Перед коммитом сверить `git var GIT_AUTHOR_IDENT`.
+- Автор — `Edward <168742523+edfroll@users.noreply.github.com>`, noreply-адрес GitHub. Решено Edward 06.11.2026 (MW-14): реальная почта в истории
+  не светится, тот же адрес GitHub ставит при squash-merge. Перед коммитом сверить `git var GIT_AUTHOR_IDENT`.
+- Откуда берётся автор: в облаке — переменные `GIT_AUTHOR_*`/`GIT_COMMITTER_*` окружения `MyWeather` (§1.2);
+  на Mac — глобальный `~/.gitconfig` (noreply), без переопределения `user.email` в клоне.
+- Старые коммиты остаются от `edvard.froll@gmail.com`, историю не переписываем.
 - Сообщение: `MW-n: <imperative, English>`.
 - Без `Co-Authored-By`, без «Generated with/by», без ссылок на сессии — в коммитах и в сообщении сквоша.
 - Исключение для описания PR: платформа ставит первыми строками скрытый маркер и «Requested by Edward · ссылка на
@@ -309,7 +313,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | Хук | Срабатывает на | Пропускает |
 |---|---|---|
 | `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` или хост `myweather.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW` (`project.key` или `project.id` `10000`); JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей, без `OR` на верхнем уровне (внутри скобок можно). Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
-| `commit_guard.py` | `Bash` с `git commit` (в том числе за `env`, `command`, путём к git, внутри `bash -c`); трейлеры — и в `merge`, `cherry-pick`, `revert`, `tag`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `edvard.froll@gmail.com` (`--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`; для `--amend` без `--reset-author` — автор исходного коммита); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
+| `commit_guard.py` | `Bash` с `git commit` (в том числе за `env`, `command`, путём к git, внутри `bash -c`); трейлеры — и в `merge`, `cherry-pick`, `revert`, `tag`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `168742523+edfroll@users.noreply.github.com` (на переход MW-14 ещё и `edvard.froll@gmail.com`; `--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`; для `--amend` без `--reset-author` — автор исходного коммита); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
 
 - Тесты: `python3 .claude/hooks/tests/test_hooks.py` — подают хукам JSON так же, как Claude Code, и проверяют
   код выхода. Правка хука — вместе с тестом.
