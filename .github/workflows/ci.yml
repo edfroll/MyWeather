@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+env:
+  # Matches Xcode on the developer's Mac; change together with it.
+  XCODE_VERSION: "27.0"
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -22,9 +26,9 @@ jobs:
       - name: Select Xcode
         run: |
           ls -d /Applications/Xcode*.app
-          XCODE=$(ls -d /Applications/Xcode_27*.app 2>/dev/null | sort -V | tail -n 1)
-          if [ -z "$XCODE" ]; then
-            echo "No Xcode 27 on runner" >&2
+          XCODE="/Applications/Xcode_${XCODE_VERSION}.app"
+          if [ ! -d "$XCODE" ]; then
+            echo "Xcode $XCODE_VERSION not found on runner" >&2
             exit 1
           fi
           sudo xcode-select -s "$XCODE"
