@@ -70,9 +70,22 @@ def check_project_ref(field, value):
         raise Violation(f"{field}={value!r}: only project {PROJECT_KEY} is allowed")
 
 
+def encloses(text):
+    """True when the opening parenthesis at 0 closes at the last character."""
+    depth = 0
+    for i, ch in enumerate(text):
+        depth += (ch == "(") - (ch == ")")
+        if depth == 0:
+            return i == len(text) - 1
+    return False
+
+
 def top_level(jql):
     """JQL with quoted strings and parenthesized groups removed."""
     text = re.sub(r"\"[^\"]*\"|'[^']*'", '""', jql)
+    text = re.split(r"\border\s+by\b", text, flags=re.IGNORECASE)[0].strip()
+    while text.startswith("(") and text.endswith(")") and encloses(text):
+        text = text[1:-1].strip()  # a group around the whole query is not a nested one
     out, depth = [], 0
     for ch in text:
         if ch == "(":

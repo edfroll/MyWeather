@@ -103,7 +103,9 @@ class JiraScope(unittest.TestCase):
         for jql in ("statusCategory != Done", "project = OPS", "project in (MW, OPS)",
                     "project != MW", "project = MW OR key = ABC-1",
                     "project = MW OR assignee = currentUser()", "project = MW AND project is not EMPTY",
-                    "project = MW || status = Done"):
+                    "project = MW || status = Done",
+                    "(project = MW OR assignee = currentUser())",
+                    "((project = MW) OR (status = Done)) ORDER BY rank"):
             self.assertBlocked(tool, {"cloudId": CLOUD, "jql": jql})
 
     def test_bad_input_does_not_block(self):
