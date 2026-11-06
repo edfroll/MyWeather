@@ -63,7 +63,8 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 
 ## Коммиты и PR
 
-- Автор коммитов — `Edward <edvard.froll@gmail.com>`; перед коммитом сверить `git var GIT_AUTHOR_IDENT`.
+- Автор коммитов — `Edward <168742523+edfroll@users.noreply.github.com>` (noreply GitHub, реальная почта в истории не светится);
+  перед коммитом сверить `git var GIT_AUTHOR_IDENT`.
 - **Никаких трейлеров `Co-Authored-By: Claude …`** в сообщениях коммитов, в том числе при сквоше
   (отключено и в `.claude/settings.json`).
 - В описаниях PR и сообщениях коммитов **не писать** «🤖 Generated with [Claude Code]»,

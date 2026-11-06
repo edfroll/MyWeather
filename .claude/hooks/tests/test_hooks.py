@@ -15,7 +15,8 @@ HOOKS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JIRA = os.path.join(HOOKS, "jira_scope.py")
 COMMIT = os.path.join(HOOKS, "commit_guard.py")
 CLOUD = "7d0914d2-a05e-48d3-a0e5-46fe9e3870b9"
-GOOD = "edvard.froll@gmail.com"
+GOOD = "168742523+edfroll@users.noreply.github.com"
+LEGACY = "edvard.froll@gmail.com"  # allowed during the MW-14 switch-over
 
 # The guards must not depend on the caller's git identity.
 GIT_ENV = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
@@ -146,11 +147,18 @@ class CommitGuard(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("author", err)
 
+    def test_legacy_author_passes_during_switch(self):
+        # MW-14: gmail stays allowed until the cloud environment and the Mac clone use noreply.
+        self.set_email(LEGACY)
+        self.assertEqual(self.bash('git commit -m "MW-14: x"')[0], 0)
+
     def test_author_overrides(self):
         self.assertEqual(self.bash('git commit --author="Claude <noreply@anthropic.com>" -m x')[0], 2)
         self.assertEqual(self.bash("GIT_AUTHOR_EMAIL=bot@example.com git commit -m x")[0], 2)
         self.assertEqual(self.bash("git -c user.email=bot@example.com commit -m x")[0], 2)
         self.assertEqual(self.bash(f'git commit --author "Edward <{GOOD}>" -m x')[0], 0)
+        self.assertEqual(self.bash(f"GIT_AUTHOR_EMAIL={GOOD} git commit -m x")[0], 0)
+        self.assertEqual(self.bash("git -c user.email=168742523+someone@users.noreply.github.com commit -m x")[0], 2)
         env = dict(GIT_ENV, GIT_AUTHOR_EMAIL="bot@example.com")
         self.assertEqual(self.bash("git commit -m x", env=env)[0], 2)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """PreToolUse guard for commits (harness §7.2, CLAUDE.md «Коммиты и PR»).
 
-Bash: a `git commit` must have author edvard.froll@gmail.com, and its message
+Bash: a `git commit` must have an allowed author email (AUTHOR_EMAILS), and its message
 must carry no AI attribution (Co-Authored-By: Claude, Claude-Session,
 "Generated with/by Claude Code", claude.ai session links).
 GitHub MCP: commits made through the API (push_files, create_or_update_file,
@@ -18,7 +18,11 @@ import shlex
 import subprocess
 import sys
 
-AUTHOR_EMAIL = "edvard.froll@gmail.com"
+# GitHub noreply address of edfroll (MW-14). The gmail address stays allowed only
+# while the cloud environment and the Mac clone switch over; MW-14 removes it last.
+AUTHOR_EMAIL = "168742523+edfroll@users.noreply.github.com"
+LEGACY_EMAILS = {"edvard.froll@gmail.com"}
+AUTHOR_EMAILS = {AUTHOR_EMAIL} | LEGACY_EMAILS
 
 ATTRIBUTION = [
     re.compile(r"co-authored-by:\s*claude", re.IGNORECASE),
@@ -100,7 +104,7 @@ def check_bash(command, cwd):
             email = amended_email(workdir)  # --amend keeps the original author
         else:
             email = effective_email(author, env_email[-1] if env_email else None, git_opts, workdir)
-        if email is not None and email.strip("'\"").lower() != AUTHOR_EMAIL:
+        if email is not None and email.strip("'\"").lower() not in AUTHOR_EMAILS:
             raise Violation(
                 f"commit author email is {email!r}; only {AUTHOR_EMAIL} is allowed "
                 "(check `git var GIT_AUTHOR_IDENT`)"

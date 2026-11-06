@@ -130,7 +130,7 @@ P3 против P5: по умолчанию самая маленькая пра
 Пишется по harness §3:
 
 - ветка `MW-n-<slug>`, коммиты `MW-n: <imperative, English>`;
-- автор `Edward <edvard.froll@gmail.com>`, без `Co-Authored-By`, «Generated with/by» и ссылок на сессии;
+- автор `Edward <168742523+edfroll@users.noreply.github.com>`, без `Co-Authored-By`, «Generated with/by» и ссылок на сессии;
 - PR в `develop`, squash.
 
 ### Ход тикета
