@@ -87,6 +87,10 @@ class JiraScope(unittest.TestCase):
                            {"cloudId": CLOUD, "issueIdOrKey": "MW-10", "fields": {"parent": {"key": "ABC-1"}}})
         self.assertBlocked("mcp__Atlassian_MCP__editJiraIssue",
                            {"cloudId": CLOUD, "issueIdOrKey": "MW-10", "rankBeforeIssue": "ABC-3"})
+        self.assertBlocked("mcp__Atlassian_MCP__createJiraIssue",
+                           {"cloudId": CLOUD, "fields": {"project": {"id": "10001"}}})
+        self.assertAllowed("mcp__Atlassian_MCP__createJiraIssue",
+                           {"cloudId": CLOUD, "fields": {"project": {"id": "10000"}}})
 
     def test_jql(self):
         tool = "mcp__Atlassian_MCP__searchJiraIssuesUsingJql"
@@ -94,8 +98,12 @@ class JiraScope(unittest.TestCase):
                     'project in ("MW") AND sprint in openSprints()',
                     "key = MW-10", "parent = MW-1 ORDER BY created DESC"):
             self.assertAllowed(tool, {"cloudId": CLOUD, "jql": jql})
+        self.assertAllowed(tool, {"cloudId": CLOUD,
+                                  "jql": 'project = MW AND (status = "To Do" OR assignee = currentUser()) ORDER BY rank'})
         for jql in ("statusCategory != Done", "project = OPS", "project in (MW, OPS)",
-                    "project != MW", "project = MW OR key = ABC-1"):
+                    "project != MW", "project = MW OR key = ABC-1",
+                    "project = MW OR assignee = currentUser()", "project = MW AND project is not EMPTY",
+                    "project = MW || status = Done"):
             self.assertBlocked(tool, {"cloudId": CLOUD, "jql": jql})
 
     def test_bad_input_does_not_block(self):
@@ -157,6 +165,28 @@ class CommitGuard(unittest.TestCase):
             code, err = self.bash(cmd)
             self.assertEqual(code, 2, line)
             self.assertIn("attribution", err)
+
+    def test_other_command_forms(self):
+        trailer = "Co-Authored-By: Claude <noreply@anthropic.com>"
+        for cmd in (f'env FOO=1 git commit -m x -m "{trailer}"',
+                    f'command git commit -m x -m "{trailer}"',
+                    f'/usr/bin/git commit -m x -m "{trailer}"',
+                    f"bash -c 'git commit -m x -m \"{trailer}\"'",
+                    f'git merge --no-ff -m "{trailer}" topic'):
+            self.assertEqual(self.bash(cmd)[0], 2, cmd)
+        self.set_email("bot@example.com")
+        for cmd in ("env FOO=1 git commit -m x", "/usr/bin/git commit -m x", "bash -c 'git commit -m x'"):
+            self.assertEqual(self.bash(cmd)[0], 2, cmd)
+
+    def test_amend_checks_original_author(self):
+        def commit(email):
+            subprocess.run(["git", "-C", self.repo, "-c", f"user.email={email}", "commit", "-q",
+                            "--allow-empty", "-m", "x"], check=True, env=GIT_ENV)
+        commit("bot@example.com")
+        self.assertEqual(self.bash("git commit --amend --no-edit")[0], 2)
+        self.assertEqual(self.bash("git commit --amend --no-edit --reset-author")[0], 0)
+        commit(GOOD)
+        self.assertEqual(self.bash("git commit --amend --no-edit")[0], 0)
 
     def test_message_file_checked(self):
         with open(os.path.join(self.repo, "msg.txt"), "w") as fh:

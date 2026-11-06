@@ -18,10 +18,11 @@ SITE_HOST = "myweather.atlassian.net"
 PROJECT_KEY = "MW"
 PROJECT_ID = "10000"
 
+TOP_LEVEL_OR = re.compile(r"\bOR\b|\|\|", re.IGNORECASE)
 ISSUE_KEY = re.compile(r"^MW-\d+$")
 ANY_ISSUE_KEY = re.compile(r"\b([A-Z][A-Z0-9_]*)-\d+\b")
 JQL_PROJECT = re.compile(
-    r"\bproject\s*(not\s+in|in|!=|=|~)\s*(\([^)]*\)|\"[^\"]*\"|'[^']*'|[\w-]+)",
+    r"\bproject\s*(not\s+in|is\s+not|in|is|!=|=|~)\s*(\([^)]*\)|\"[^\"]*\"|'[^']*'|[\w-]+)",
     re.IGNORECASE,
 )
 
@@ -69,11 +70,27 @@ def check_project_ref(field, value):
         raise Violation(f"{field}={value!r}: only project {PROJECT_KEY} is allowed")
 
 
+def top_level(jql):
+    """JQL with quoted strings and parenthesized groups removed."""
+    text = re.sub(r"\"[^\"]*\"|'[^']*'", '""', jql)
+    out, depth = [], 0
+    for ch in text:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(depth - 1, 0)
+        elif depth == 0:
+            out.append(ch)
+    return "".join(out)
+
+
 def check_jql(jql):
     keys = ANY_ISSUE_KEY.findall(jql)
     foreign = sorted({k for k in keys if k != PROJECT_KEY})
     if foreign:
         raise Violation(f"jql names issues outside {PROJECT_KEY}: {', '.join(foreign)}")
+    if TOP_LEVEL_OR.search(top_level(jql)):
+        raise Violation("jql: top-level OR can widen the query beyond MW; put OR inside parentheses after 'project = MW AND'")
     clauses = JQL_PROJECT.findall(jql)
     for op, operand in clauses:
         op = " ".join(op.lower().split())
@@ -99,8 +116,8 @@ def walk(node, parent_key=""):
             elif name in PROJECT_FIELDS:
                 for item in value if isinstance(value, list) else [value]:
                     check_project_ref(key, item)
-            elif name == "key" and parent_key.lower() == "project":
-                check_project_ref("project.key", value)
+            elif name in ("key", "id") and parent_key.lower() == "project":
+                check_project_ref(f"project.{key}", value)
             elif name == "key" and parent_key.lower() in ISSUE_OBJECTS:
                 check_issue_ref(f"{parent_key}.key", value)
             elif name == "project" and isinstance(value, str):

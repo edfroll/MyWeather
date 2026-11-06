@@ -302,24 +302,26 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 
 ### 7.2 Хуки (MW-10, 06.11.2026)
 
-Хуки `PreToolUse` в `.claude/settings.json`, скрипты в `.claude/hooks/` (python3, только стандартная библиотека,
-Linux и macOS). Блок — код выхода 2 с причиной, которую видит модель. Ошибка самого скрипта вызов **не** блокирует
+Хуки `PreToolUse` в `.claude/settings.json`, скрипты в `.claude/hooks/` (python3, только стандартная библиотека;
+проверено на Linux, ❓ macOS — при первом запуске RC после merge MW-10). Блок — код выхода 2 с причиной, которую видит модель. Ошибка самого скрипта вызов **не** блокирует
 (код 1, предупреждение): баг хука не должен останавливать конвейер.
 
 | Хук | Срабатывает на | Пропускает |
 |---|---|---|
-| `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` или хост `myweather.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW`; JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей. Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
-| `commit_guard.py` | `Bash` с `git commit`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `edvard.froll@gmail.com` (`--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
+| `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` или хост `myweather.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW` (`project.key` или `project.id` `10000`); JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей, без `OR` на верхнем уровне (внутри скобок можно). Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
+| `commit_guard.py` | `Bash` с `git commit` (в том числе за `env`, `command`, путём к git, внутри `bash -c`); трейлеры — и в `merge`, `cherry-pick`, `revert`, `tag`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `edvard.froll@gmail.com` (`--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`; для `--amend` без `--reset-author` — автор исходного коммита); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
 
 - Тесты: `python3 .claude/hooks/tests/test_hooks.py` — подают хукам JSON так же, как Claude Code, и проверяют
   код выхода. Правка хука — вместе с тестом.
 - Ложное срабатывание: в JQL текст вида `UTF-8` читается как ключ задачи чужого проекта — переписать запрос.
   Команда, где `git commit` соседствует с текстом про трейлеры (например, `grep` по ним), блокируется целиком —
-  разнести по разным вызовам.
+  разнести по разным вызовам. JQL `key = MW-1 OR key = MW-2` блокируется — писать `key in (MW-1, MW-2)`.
+- Граница — защита от случайности, не от намеренного обхода: сообщение коммита из редактора или из файла, созданного
+  в той же команде, хук не видит. Главная граница Jira — сайт: на `myweather` сейчас один проект.
 - **Где хуки действуют.** Claude Code читает хуки при старте сессии и правку `settings.json` в идущей сессии не
   подхватывает (проверено 06.11.2026 в треде MW-10). Облачный тред стартует на клоне `main` (§1.2), поэтому хуки
-  из `develop` доходят до облачных тредов только с релизом. На Mac (Remote Control) хуки действуют с ветки, на которой
-  стартовала сессия. Что хуки репо срабатывают в Claude Code на Linux, проверено 06.11.2026 headless-запуском
+  из `develop` доходят до облачных тредов только с релизом. ❓ На Mac (Remote Control) хуки, по той же логике, действуют
+  с ветки, на которой стартовала сессия — проверить при первом запуске RC после merge MW-10. Что хуки репо срабатывают в Claude Code на Linux, проверено 06.11.2026 headless-запуском
   `claude -p` в облачном контейнере: коммит с трейлером заблокирован, чистый прошёл.
 
 ## 8. Лимиты Pro **[Edward]**

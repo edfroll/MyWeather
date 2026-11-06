@@ -28,11 +28,14 @@ ATTRIBUTION = [
     re.compile(r"claude\.ai/code/session_", re.IGNORECASE),
 ]
 
-# `git [global options] commit`, at the start of a shell command segment.
+# `git [global options] commit` as a command: after a separator or quote, optionally
+# behind env assignments, `env`, `command`, or a path to git.
 GIT_COMMIT = re.compile(
-    r"(?:^|[;&|(\n]|\bthen|\bdo|\$\()\s*(?:\w+=\S*\s+)*git"
+    r"(?:^|[;&|(\n\"'`]|\bthen|\bdo|\$\()\s*(?:(?:env|command)\s+)?(?:\w+=\S*\s+)*(?:\S*/)?git"
     r"((?:\s+(?:-[cC]\s+\S+|--[\w-]+(?:=\S+)?|-[a-zA-Z]))*)\s+commit(?:\s|$)"
 )
+# Any git command that writes a commit message; the message check covers all of them.
+GIT_WRITES_MESSAGE = re.compile(r"\bgit\b[\s\S]*\b(commit|merge|cherry-pick|revert|tag|notes)\b")
 EMAIL = re.compile(r"<([^>]*)>")
 
 
@@ -58,11 +61,10 @@ def tokens_after(command, start):
 
 
 def check_bash(command, cwd):
+    if GIT_WRITES_MESSAGE.search(command):
+        # The whole command text holds -m strings and heredoc bodies.
+        check_message(command, "commit message")
     matches = list(GIT_COMMIT.finditer(command))
-    if not matches:
-        return
-    # The whole command text holds -m strings and heredoc bodies.
-    check_message(command, "commit message")
     for match in matches:
         git_opts = tokens_after(match.group(1), 0) if match.group(1) else []
         args = tokens_after(command, match.end())
@@ -72,10 +74,15 @@ def check_bash(command, cwd):
                 workdir = os.path.join(workdir or ".", git_opts[i + 1])
         author = None
         msg_file = None
+        amend = reset_author = False
         for i, arg in enumerate(args):
             if arg in ("&&", "||", ";", "|"):
                 break
-            if arg.startswith("--author="):
+            if arg == "--amend":
+                amend = True
+            elif arg == "--reset-author":
+                reset_author = True
+            elif arg.startswith("--author="):
                 author = arg.split("=", 1)[1]
             elif arg == "--author" and i + 1 < len(args):
                 author = args[i + 1]
@@ -89,12 +96,26 @@ def check_bash(command, cwd):
                 with open(path, encoding="utf-8", errors="replace") as fh:
                     check_message(fh.read(), f"commit message file {msg_file}")
         env_email = re.findall(r"\bGIT_AUTHOR_EMAIL=(\S+)", command[: match.end()])
-        email = effective_email(author, env_email[-1] if env_email else None, git_opts, workdir)
+        if amend and not reset_author and not author:
+            email = amended_email(workdir)  # --amend keeps the original author
+        else:
+            email = effective_email(author, env_email[-1] if env_email else None, git_opts, workdir)
         if email is not None and email.strip("'\"").lower() != AUTHOR_EMAIL:
             raise Violation(
                 f"commit author email is {email!r}; only {AUTHOR_EMAIL} is allowed "
                 "(check `git var GIT_AUTHOR_IDENT`)"
             )
+
+
+def amended_email(workdir):
+    try:
+        log = subprocess.run(["git", "log", "-1", "--format=%ae"],
+                             cwd=workdir or None, capture_output=True, text=True, timeout=5)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if log.returncode != 0:
+        return None
+    return log.stdout.strip() or None
 
 
 def effective_email(author, env_email, git_opts, workdir):
