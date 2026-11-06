@@ -19,7 +19,7 @@
 | Скиллы ролей | `.claude/skills/mw-*` — копии ролей `edfroll/claude-sync` + дельта MW | ✅ все, список — §10 |
 | Инженерные принципы | `docs/engineering-principles.md` — копия `claude-sync/core/rules/` | ✅ 29.10.2026 |
 | Разрешения | `.claude/settings.json` | v2 (§7) |
-| Хуки | `.claude/settings.json` + `.claude/hooks/` | бэклог §10 |
+| Хуки | `.claude/settings.json` + `.claude/hooks/` | ✅ 06.11.2026 (MW-10), §7.2 |
 | Project instructions | настройки проекта claude.ai | Edward, по §1.3 |
 | Jira MW | `myweather.atlassian.net` | схема — Edward, §4 |
 | GitHub | настройки репозитория | Edward, §3.4 |
@@ -300,10 +300,29 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
   файлов).
 - Общее разрешение `Bash` на Mac убирается (Edward, после merge этого документа).
 
-### 7.2 Хуки — бэклог §10
+### 7.2 Хуки (MW-10, 06.11.2026)
 
-- `PreToolUse` для Atlassian: пропускает только cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` и ключи `MW-*`.
-- Git: автор только `edvard.froll@gmail.com`; запрет трейлеров.
+Хуки `PreToolUse` в `.claude/settings.json`, скрипты в `.claude/hooks/` (python3, только стандартная библиотека;
+проверено на Linux, ❓ macOS — при первом запуске RC после merge MW-10). Блок — код выхода 2 с причиной, которую видит модель. Ошибка самого скрипта вызов **не** блокирует
+(код 1, предупреждение): баг хука не должен останавливать конвейер.
+
+| Хук | Срабатывает на | Пропускает |
+|---|---|---|
+| `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` или хост `myweather.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW` (`project.key` или `project.id` `10000`); JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей, без `OR` на верхнем уровне (внутри скобок можно). Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
+| `commit_guard.py` | `Bash` с `git commit` (в том числе за `env`, `command`, путём к git, внутри `bash -c`); трейлеры — и в `merge`, `cherry-pick`, `revert`, `tag`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `edvard.froll@gmail.com` (`--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`; для `--amend` без `--reset-author` — автор исходного коммита); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
+
+- Тесты: `python3 .claude/hooks/tests/test_hooks.py` — подают хукам JSON так же, как Claude Code, и проверяют
+  код выхода. Правка хука — вместе с тестом.
+- Ложное срабатывание: в JQL текст вида `UTF-8` читается как ключ задачи чужого проекта — переписать запрос.
+  Команда, где `git commit` соседствует с текстом про трейлеры (например, `grep` по ним), блокируется целиком —
+  разнести по разным вызовам. JQL `key = MW-1 OR key = MW-2` блокируется — писать `key in (MW-1, MW-2)`.
+- Граница — защита от случайности, не от намеренного обхода: сообщение коммита из редактора или из файла, созданного
+  в той же команде, хук не видит. Главная граница Jira — сайт: на `myweather` сейчас один проект.
+- **Где хуки действуют.** Claude Code читает хуки при старте сессии и правку `settings.json` в идущей сессии не
+  подхватывает (проверено 06.11.2026 в треде MW-10). Облачный тред стартует на клоне `main` (§1.2), поэтому хуки
+  из `develop` доходят до облачных тредов только с релизом. ❓ На Mac (Remote Control) хуки, по той же логике, действуют
+  с ветки, на которой стартовала сессия — проверить при первом запуске RC после merge MW-10. Что хуки репо срабатывают в Claude Code на Linux, проверено 06.11.2026 headless-запуском
+  `claude -p` в облачном контейнере: коммит с трейлером заблокирован, чистый прошёл.
 
 ## 8. Лимиты Pro **[Edward]**
 
@@ -336,7 +355,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | ✅ копия 29.10.2026 (MW-8) |
 | `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | ✅ копия 29.10.2026 (MW-9) |
 | `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | ✅ копия 29.10.2026 (MW-4) |
-| хуки §7.2 | — | — | бэклог |
+| хуки §7.2 | — | — | ✅ 06.11.2026 (MW-10) |
 
 Дельта собственного проекта ко всем ролям — `workflows/own/ticket/overlay.md`; принципы P1–P14 и их поднаборы по
 ролям — `docs/engineering-principles.md`.
@@ -345,4 +364,5 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 
 1. Видна ли доля лимита для порога 50% (§8).
 2. `manageJiraSprint` на первом спринте (§4.5).
-3. Срабатывают ли хуки репо в облачных тредах — проверить первым PR с хуком.
+3. Хуки репо в облачном треде: срабатывают в Claude Code на Linux (§7.2); в облачных тредах проекта — проверить
+   первым тредом после релиза, который принесёт хуки в `main`.
