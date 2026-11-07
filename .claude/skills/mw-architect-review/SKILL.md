@@ -67,7 +67,7 @@ disable-model-invocation: true
 
 ### Спринт
 
-- Тикет ревизии — `architect-review-N`, N — номер спринта; один на спринт. Спринт недельный, объём — предел
+- Summary тикета ревизии — `architect-review-N`, N — номер спринта; ключ — обычный `MW-n`; один на спринт. Спринт недельный, объём — предел
   (harness §4.5; строка «спринт по объёму» в «Что читаешь» устарела, действует harness).
 - Первая ревизия — в спринте после прогона `mw-global-architect` и `mw-global-critic`: без `docs/architecture.md`
   сверять не с чем.
@@ -91,7 +91,7 @@ disable-model-invocation: true
 
 ### Вход — уточнения MW
 
-- **Тикет review** и его спринт: список тикетов спринта, их спеки `docs/tasks/MW-n.md` с разделами «After review» и
+- **Тикет `architect-review-N`** и его спринт: список тикетов спринта, их спеки `docs/tasks/MW-n.md` с разделами «After review» и
   «After review 2» (harness §6.1).
 - **`docs/architecture.md`** — решения `A-n`; это мерило ревизии.
 - **Дифф спринта.** Релиз `develop → main` открывается только после ревизии (harness §4.5 п. 3), поэтому на момент
