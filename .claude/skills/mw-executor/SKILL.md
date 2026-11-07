@@ -69,7 +69,7 @@ P12, P13, P14. swiftui-pro не загружает: спека уже учла �
 
 - **Вход:** спека `docs/tasks/MW-n.md` (standard, large) или постановка треда тикета (minor, small) + тикет MW-n
   (harness §5).
-- **Ветка** `MW-n-<slug>` от `develop` (harness §3.1).
+- **Ветка** `MW-n` от `develop`, исправление после Rejected — `MW-n-reject-fix` (harness §3.1).
 - **Коммиты** `MW-n: <imperative, English>`, автор `Edward <168742523+edfroll@users.noreply.github.com>` — перед коммитом сверить
   `git var GIT_AUTHOR_IDENT`. Без `Co-Authored-By`, «Generated with/by» и ссылок на сессии (`CLAUDE.md`, harness §3.2).
 - **Стек:** iOS 17, Swift 6, Swift Testing. API новее iOS 17 — только через `#available` с фолбэком (`CLAUDE.md`).
