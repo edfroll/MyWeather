@@ -87,7 +87,7 @@ disable-model-invocation: true
 
 ### Круг 1 — внутренний (standard, large; harness §6.2)
 
-- Вход: спека `docs/tasks/MW-n.md` и дифф ветки `MW-n-<slug>` против `develop` (draft PR).
+- Вход: спека `docs/tasks/MW-n.md` и дифф ветки `MW-n` против `develop` (draft PR).
 - Замечания — архитектору в тред тикета, не в PR. Архитектор принимает или оспаривает; спорите до общего списка
   **фиксим / ложные / вне скоупа**. Вне скоупа → «Not included» в описании PR и Chore в бэклог; кто заводит и когда
   нужен Edward — harness §6.4.
