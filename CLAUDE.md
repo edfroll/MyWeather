@@ -46,6 +46,7 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 | Архитектор, критик, researcher, ревьюер тикета | `mw-architect`, `mw-critic`, `mw-researcher`, `mw-review` (MW-5…MW-8) | Opus 5.5 |
 | Ревизия архитектуры в конце спринта | `mw-architect-review` (MW-4) | Opus 5.5 |
 | Исполнитель | `mw-executor` (MW-9) | Sonnet 5.5 |
+| Тестер e2e в симуляторе (запускает Edward в локальной сессии Desktop, harness §6.5) | `mw-tester` (MW-57) | Sonnet 5.5 |
 
 Конвейер по классу тикета — harness §5, ревью — harness §6.
 
