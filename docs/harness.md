@@ -223,7 +223,8 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 3. Когда все тикеты спринта в Verified, координатор ставит тикет ревизии (роль `mw-architect-review`). Summary
    тикета — `architect-review-N`, N — номер спринта; ключ — обычный `MW-n`. Ревизия одна на спринт (решение Edward 07.11.2026).
    Ревизия сверяет код с `docs/architecture.md`, поэтому начинается со спринта после прогона `mw-global-architect`
-   и `mw-global-critic`; в Спринте 1 её нет.
+   и `mw-global-critic`. В Спринтах 1 и 2 её нет: в Спринте 2 шли сами архитектор и критик, кода приложения не было
+   (решение Edward 09.11.2026). Первая ревизия — `architect-review-3`.
    - ревизия чистая → Ready for Edward → Edward смотрит отчёт → Verified;
    - есть находки и Edward согласен → контрольный Chore в этот же спринт; Chore проходит весь путь до Verified,
      architect-review проверяет, что замечание закрыто → Verified.
