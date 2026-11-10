@@ -39,6 +39,22 @@ jobs:
           sudo xcode-select -s "$XCODE"
           xcodebuild -version
 
+      - name: SwiftLint
+        run: |
+          if ! command -v swiftlint >/dev/null; then
+            brew install swiftlint
+          fi
+          swiftlint version
+          swiftlint lint --strict --reporter github-actions-logging
+
+      - name: WeatherCore package tests
+        run: |
+          swift --version
+          swift test --package-path Packages/WeatherCore
+
+      - name: ChartKit package tests
+        run: swift test --package-path Packages/ChartKit
+
       - name: Pick simulator
         run: |
           UDID=$(xcrun simctl list devices available iPhone | awk '/^-- /{ios = ($0 ~ /^-- iOS 27/)} ios' | grep -Eo '[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}' | head -n 1)
@@ -79,3 +95,17 @@ jobs:
         with:
           name: xcresult
           path: build/*.xcresult
+
+  # ChartKitCore builds on Foundation alone; the manifest drops the SwiftUI target on Linux (A-41).
+  # Not a required check without Edward's decision (MW-30).
+  chartkit-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container: swift:6.4-noble
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: ChartKitCore tests on Linux
+        run: |
+          swift --version
+          swift test --package-path Packages/ChartKit
