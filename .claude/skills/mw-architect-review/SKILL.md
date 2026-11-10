@@ -7,8 +7,8 @@ disable-model-invocation: true
 # mw-architect-review
 
 > Копия `edfroll/claude-sync` → `workflows/own/ticket/architect-review.md` и общих правил ролей из
-> `core/roles/README.md` (main `34c4da9`, 29.10.2026) + дельта MW. Общее правило правится в claude-sync, затем
-> обновляется копия; здесь меняется только раздел «Дельта MW» (harness §10).
+> `core/roles/README.md` (main `34c4da9`, 29.10.2026; «Выход» — `896be71`, MW-17, 10.11.2026) + дельта MW.
+> Общее правило правится в claude-sync, затем обновляется копия; здесь меняется только раздел «Дельта MW» (harness §10).
 
 Запуск: «прочитай и следуй `.claude/skills/mw-architect-review/SKILL.md`, тикет MW-n».
 
@@ -54,8 +54,8 @@ disable-model-invocation: true
 
 ### Выход
 
-Отчёт в тикете или `docs/reviews/<спринт>.md`: сводка структурных изменений спринта; находки с весом; предложения
-правок `docs/architecture.md`.
+Отчёт — комментарием в тикете ревизии; ветки и PR у ревизии нет. В отчёте: сводка структурных изменений спринта;
+находки с весом; предложения правок `docs/architecture.md`.
 
 - Ревизия чистая → Ready for Edward → Edward смотрит отчёт → Verified.
 - Есть находки и Edward согласен → контрольный Chore в этот же спринт; он проходит весь путь, а review проверяет,
