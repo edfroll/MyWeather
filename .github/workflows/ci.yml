@@ -23,6 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Hook tests
+        run: |
+          python3 --version
+          python3 .claude/hooks/tests/test_hooks.py
+
       - name: Select Xcode
         run: |
           ls -d /Applications/Xcode*.app
