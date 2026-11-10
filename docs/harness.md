@@ -226,6 +226,9 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
    Ревизия сверяет код с `docs/architecture.md`, поэтому начинается со спринта после прогона `mw-global-architect`
    и `mw-global-critic`. В Спринтах 1 и 2 её нет: в Спринте 2 шли сами архитектор и критик, кода приложения не было
    (решение Edward 09.11.2026). Первая ревизия — `architect-review-3`.
+   Ревизия анализирует `develop` и ничего не меняет в репозитории: **ветки и PR у неё нет**, отчёт — комментарием
+   в тикете ревизии (решение Edward 07.11.2026, MW-17). Находки — отдельные Chore/Bug, не `MW-n-reject-fix`
+   (reject-fix — только для тикетов, забракованных Edward); правка `docs/architecture.md` — Chore со своей веткой `MW-n`.
    - ревизия чистая → Ready for Edward → Edward смотрит отчёт → Verified;
    - есть находки и Edward согласен → контрольный Chore в этот же спринт; Chore проходит весь путь до Verified,
      architect-review проверяет, что замечание закрыто → Verified.
@@ -428,7 +431,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 | `mw-critic` | критика спеки тикета | `core/roles/critic.md` | ✅ копия 29.10.2026 (MW-7) |
 | `mw-review` | ревью круга 1 и круга 2 | `core/roles/reviewer.md` | ✅ копия 29.10.2026 (MW-8) |
 | `mw-executor` | исполнение тикета на Mac | `core/roles/executor.md` | ✅ копия 29.10.2026 (MW-9) |
-| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | ✅ копия 29.10.2026 (MW-4) |
+| `mw-architect-review` | ревизия кода против `docs/architecture.md` в конце спринта | `workflows/own/ticket/architect-review.md` | ✅ копия 29.10.2026 (MW-4), «Выход» 10.11.2026 (MW-17) |
 | `mw-tester` | e2e тикета в симуляторе, локальная сессия Desktop (§6.5) | нет; обобщить в `core/roles/tester.md` после пилота MW-33 | ✅ 09.11.2026 (MW-57), только MW |
 | хуки §7.2 | — | — | ✅ 06.11.2026 (MW-10) |
 
