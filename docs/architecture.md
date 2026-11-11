@@ -638,8 +638,10 @@ Approachable Concurrency `nonisolated async` выполняется на исп�
 Для публичных типов Swift `Sendable` не выводит, поэтому пометка стоит в объявлении.
 
 В пакетах: `// swift-tools-version: 6.2` или новее, `swiftLanguageModes: [.v6]`, изоляция через
-`swiftSettings` таргета; точные имена (`.defaultIsolation(MainActor.self)`, upcoming features) сверить на Mac под
-Swift 6.4 при создании пакета.
+`swiftSettings` таргета: `.defaultIsolation(MainActor.self)` или `.defaultIsolation(nil)` и upcoming features
+`NonisolatedNonsendingByDefault`, `InferIsolatedConformances` (Approachable Concurrency сверх языкового режима
+Swift 6). Сверено под Swift 6.4 на Mac, MW-30 (§12 риск 5). Плюс `MemberImportVisibility`
+в каждом таргете — [сам: паритет с приложением, MW-30 D-3].
 **Почему не:** шаблон как есть (`MainActor` везде) — слой данных на главном потоке ловит только ревью;
 `nonisolated` везде с ручным `@MainActor` — в таргете приложения нет кода вне главного актора, пометки были бы шумом.
 **Основание:** roadmap §4 п. 1; research §1, §1.1; продукт §1.1 №2.

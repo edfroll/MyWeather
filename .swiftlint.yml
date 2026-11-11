@@ -1,0 +1,14 @@
+# Compiler silencers are not used (A-39). Only these rules; style is not linted.
+only_rules:
+  - force_unwrapping
+  - force_try
+  - force_cast
+
+included:
+  - MyWeather
+  - MyWeatherTests
+  - Packages
+
+excluded:
+  - Packages/ChartKit/.build
+  - Packages/WeatherCore/.build

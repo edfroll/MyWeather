@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BBA87A0304C74E100AA5491 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2BBA879F304C74E100AA5491 /* .gitignore */; };
+		40E18464FABDDA8BCD99B594 /* ChartKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 89892ADF28E1B7C3ABEFF224 /* ChartKitCore */; };
+		53608AF9C6113428E970163A /* WeatherCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5565694C8ED3035D4CE2C25B /* WeatherCore */; };
+		6900A6FB7219CC836E631F94 /* ChartKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8F465DDAE574976604AC8121 /* ChartKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6900A6FB7219CC836E631F94 /* ChartKit in Frameworks */,
+				40E18464FABDDA8BCD99B594 /* ChartKitCore in Frameworks */,
+				53608AF9C6113428E970163A /* WeatherCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +104,11 @@
 				2BBA8773304C3E0C00AA5491 /* MyWeather */,
 			);
 			name = MyWeather;
+			packageProductDependencies = (
+				8F465DDAE574976604AC8121 /* ChartKit */,
+				89892ADF28E1B7C3ABEFF224 /* ChartKitCore */,
+				5565694C8ED3035D4CE2C25B /* WeatherCore */,
+			);
 			productName = MyWeather;
 			productReference = 2BBA8771304C3E0C00AA5491 /* MyWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -152,6 +162,10 @@
 			);
 			mainGroup = 2BBA8768304C3E0C00AA5491;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D0A6438B6D8D142B1E15016B /* XCLocalSwiftPackageReference "ChartKit" */,
+				D44DFDDE633AAB35C3DB6F30 /* XCLocalSwiftPackageReference "WeatherCore" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2BBA8772304C3E0C00AA5491 /* Products */;
 			projectDirPath = "";
@@ -168,7 +182,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BBA87A0304C74E100AA5491 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +419,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
@@ -428,6 +442,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
@@ -467,6 +482,32 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		D0A6438B6D8D142B1E15016B /* XCLocalSwiftPackageReference "ChartKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ChartKit;
+		};
+		D44DFDDE633AAB35C3DB6F30 /* XCLocalSwiftPackageReference "WeatherCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/WeatherCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5565694C8ED3035D4CE2C25B /* WeatherCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherCore;
+		};
+		89892ADF28E1B7C3ABEFF224 /* ChartKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ChartKitCore;
+		};
+		8F465DDAE574976604AC8121 /* ChartKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ChartKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2BBA8769304C3E0C00AA5491 /* Project object */;
 }
