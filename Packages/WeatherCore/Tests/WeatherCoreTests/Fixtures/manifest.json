@@ -1,0 +1,183 @@
+{
+  "archive-auckland-end-today.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=-36.8485&longitude=174.7633&start_date=2026-11-05&end_date=2026-11-13&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 400,
+    "fetched_at_utc": "2026-11-12T17:24:45Z"
+  },
+  "archive-auckland-end-tomorrow.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=-36.8485&longitude=174.7633&start_date=2026-11-05&end_date=2026-11-14&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 400,
+    "fetched_at_utc": "2026-11-12T17:24:47Z"
+  },
+  "archive-auckland-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=-36.8485&longitude=174.7633&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:34Z"
+  },
+  "archive-berlin-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.405&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:25Z"
+  },
+  "archive-berlin-year.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.405&start_date=2025-01-01&end_date=2025-12-31&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:37Z"
+  },
+  "archive-moscow-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=55.7558&longitude=37.6173&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:16Z"
+  },
+  "archive-mumbai-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=19.076&longitude=72.8777&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:28Z"
+  },
+  "archive-murmansk-june.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=68.9585&longitude=33.0827&start_date=2025-06-01&end_date=2025-06-30&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:42Z"
+  },
+  "archive-murmansk-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=68.9585&longitude=33.0827&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:31Z"
+  },
+  "archive-newyork-dst.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.7128&longitude=-74.006&start_date=2025-10-30&end_date=2025-11-04&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:41Z"
+  },
+  "archive-newyork-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.7128&longitude=-74.006&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:22Z"
+  },
+  "archive-tokyo-recent.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.6895&longitude=139.6917&start_date=2026-11-04&end_date=2026-11-12&models=ecmwf_ifs&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover&daily=sunrise%2Csunset&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:19Z"
+  },
+  "error-429.json": {
+    "url": "https://archive-api.open-meteo.com/v1/archive",
+    "status": 429,
+    "fetched_at_utc": "2026-11-10T18:43:00Z",
+    "note": "recorded manually: real Archive response from the cloud, 2026-11-10T18:43Z, HTTP 429"
+  },
+  "forecast-auckland.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=-36.8485&longitude=174.7633&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:14Z"
+  },
+  "forecast-berlin.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.405&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:10Z"
+  },
+  "forecast-moscow.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6173&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:04Z"
+  },
+  "forecast-mumbai.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=19.076&longitude=72.8777&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:11Z"
+  },
+  "forecast-murmansk.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=68.9585&longitude=33.0827&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:13Z"
+  },
+  "forecast-newyork.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.006&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:08Z"
+  },
+  "forecast-tokyo.json": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&forecast_days=16&hourly=temperature_2m%2Capparent_temperature%2Crelative_humidity_2m%2Cprecipitation%2Cprecipitation_probability%2Cwind_speed_10m%2Cwind_gusts_10m%2Cwind_direction_10m%2Cpressure_msl%2Ccloud_cover%2Cuv_index%2Cweather_code%2Cis_day&daily=weather_code%2Csunrise%2Csunset%2Ctemperature_2m_max%2Ctemperature_2m_min&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:06Z"
+  },
+  "geocoding-berlin-en.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=Berlin&language=en&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:53Z"
+  },
+  "geocoding-berlin-ru.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=Berlin&language=ru&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:51Z"
+  },
+  "geocoding-empty-en.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=zzqxv&language=en&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:59Z"
+  },
+  "geocoding-moscow-en.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=Moscow&language=en&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:56Z"
+  },
+  "geocoding-moscow-ru.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&language=ru&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:54Z"
+  },
+  "geocoding-springfield-en.json": {
+    "url": "https://geocoding-api.open-meteo.com/v1/search?name=Springfield&language=en&count=10",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:57Z"
+  },
+  "historical-forecast-auckland-end-today.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=-36.8485&longitude=174.7633&start_date=2026-11-05&end_date=2026-11-13&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:46Z"
+  },
+  "historical-forecast-auckland-end-tomorrow.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=-36.8485&longitude=174.7633&start_date=2026-11-05&end_date=2026-11-14&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:49Z"
+  },
+  "historical-forecast-auckland-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=-36.8485&longitude=174.7633&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:35Z"
+  },
+  "historical-forecast-berlin-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.405&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:26Z"
+  },
+  "historical-forecast-berlin-year.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.405&start_date=2025-01-01&end_date=2025-12-31&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:39Z"
+  },
+  "historical-forecast-moscow-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6173&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:17Z"
+  },
+  "historical-forecast-mumbai-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=19.076&longitude=72.8777&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:29Z"
+  },
+  "historical-forecast-murmansk-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=68.9585&longitude=33.0827&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:32Z"
+  },
+  "historical-forecast-newyork-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.006&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:24Z"
+  },
+  "historical-forecast-tokyo-recent.json": {
+    "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&start_date=2026-11-04&end_date=2026-11-12&hourly=uv_index&timezone=auto&wind_speed_unit=ms&timeformat=unixtime",
+    "status": 200,
+    "fetched_at_utc": "2026-11-12T17:24:21Z"
+  }
+}

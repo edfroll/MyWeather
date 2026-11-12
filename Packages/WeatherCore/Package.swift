@@ -17,7 +17,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "WeatherCore", swiftSettings: settings),
-        .testTarget(name: "WeatherCoreTests", dependencies: ["WeatherCore"], swiftSettings: settings),
+        .testTarget(name: "WeatherCoreTests", dependencies: ["WeatherCore"], resources: [.copy("Fixtures")], swiftSettings: settings),
     ],
     swiftLanguageModes: [.v6]
 )
