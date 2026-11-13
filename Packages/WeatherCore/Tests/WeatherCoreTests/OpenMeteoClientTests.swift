@@ -9,7 +9,7 @@ struct OpenMeteoClientTests {
     private func client(status: Int, fixture: String?) -> OpenMeteoClient {
         OpenMeteoClient(transport: StubTransport { request in
             let body = try fixture.map { try Fixture.data($0) } ?? Data()
-            return (body, httpResponse(status, url: request.url ?? URL(fileURLWithPath: "/")))
+            return (body, try httpResponse(status, url: request.url ?? URL(fileURLWithPath: "/")))
         })
     }
 
@@ -21,7 +21,7 @@ struct OpenMeteoClientTests {
         let log = CallLog()
         let client = OpenMeteoClient(transport: StubTransport { request in
             await log.record(request)
-            return (try Fixture.data("forecast-tokyo"), httpResponse(200))
+            return (try Fixture.data("forecast-tokyo"), try httpResponse(200))
         })
         let forecast = try await client.forecast(at: tokyo)
         #expect(forecast.timeZone.identifier == "Asia/Tokyo")

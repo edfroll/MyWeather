@@ -15,10 +15,8 @@ package enum OpenMeteoDecoding {
         let hourly = try hourlyColumns(of: dto, expected: OpenMeteoRequest.forecastHourly.map(\.apiName)
             + ["weather_code", "is_day"])
         let grid = try makeGrid(hourly, metrics: OpenMeteoRequest.forecastHourly)
-        let codes = try hourly.columns["weather_code"].unwrapped().map { value throws(WeatherError) -> Int? in
-            guard let value else { return nil }
-            guard let code = Int(exactly: value) else { throw .decoding }
-            return code
+        let codes = try hourly.columns["weather_code"].unwrapped().map { value throws(WeatherError) in
+            try wmoCode(value)
         }
         let isDay = try hourly.columns["is_day"].unwrapped().map { value throws(WeatherError) -> Bool? in
             guard let value else { return nil }
@@ -30,20 +28,20 @@ package enum OpenMeteoDecoding {
         }
         let daily = try dailyColumns(of: dto, expected: ["weather_code", "sunrise", "sunset",
                                                           "temperature_2m_max", "temperature_2m_min"])
+        let codeColumn = try daily.columns["weather_code"].unwrapped()
+        let sunriseColumn = try daily.columns["sunrise"].unwrapped()
+        let sunsetColumn = try daily.columns["sunset"].unwrapped()
+        let maxColumn = try daily.columns["temperature_2m_max"].unwrapped()
+        let minColumn = try daily.columns["temperature_2m_min"].unwrapped()
         var days: [ForecastDay] = []
         for index in 0..<daily.time.count {
-            var code: Int?
-            if let raw = try daily.columns["weather_code"].unwrapped()[index] {
-                guard let exact = Int(exactly: raw) else { throw .decoding }
-                code = exact
-            }
             days.append(ForecastDay(
                 date: daily.time[index],
-                weatherCode: code,
-                sunrise: instant(try daily.columns["sunrise"].unwrapped()[index]),
-                sunset: instant(try daily.columns["sunset"].unwrapped()[index]),
-                temperatureMax: try daily.columns["temperature_2m_max"].unwrapped()[index].map(Float.init),
-                temperatureMin: try daily.columns["temperature_2m_min"].unwrapped()[index].map(Float.init)))
+                weatherCode: try wmoCode(codeColumn[index]),
+                sunrise: instant(sunriseColumn[index]),
+                sunset: instant(sunsetColumn[index]),
+                temperatureMax: maxColumn[index].map(Float.init),
+                temperatureMin: minColumn[index].map(Float.init)))
         }
         return Forecast(timeZone: timeZone, hourly: grid, weatherCode: codes, isDay: isDay, days: days)
     }
@@ -55,12 +53,13 @@ package enum OpenMeteoDecoding {
         let hourly = try hourlyColumns(of: dto, expected: metrics.map(\.apiName))
         let grid = try makeGrid(hourly, metrics: metrics)
         let daily = try dailyColumns(of: dto, expected: ["sunrise", "sunset"])
+        let sunriseColumn = try daily.columns["sunrise"].unwrapped()
+        let sunsetColumn = try daily.columns["sunset"].unwrapped()
         var days: [SunDay] = []
         for index in 0..<daily.time.count {
-            days.append(SunDay(
-                date: daily.time[index],
-                sunrise: instant(try daily.columns["sunrise"].unwrapped()[index]),
-                sunset: instant(try daily.columns["sunset"].unwrapped()[index])))
+            days.append(SunDay(date: daily.time[index],
+                               sunrise: instant(sunriseColumn[index]),
+                               sunset: instant(sunsetColumn[index])))
         }
         return ArchiveData(hourly: grid, days: days)
     }
@@ -154,6 +153,13 @@ package enum OpenMeteoDecoding {
             columns[name] = column
         }
         return Daily(time: time, columns: columns)
+    }
+
+    /// WMO code: `nil` stays `nil`, a non-integer value breaks the contract.
+    private static func wmoCode(_ value: Double?) throws(WeatherError) -> Int? {
+        guard let value else { return nil }
+        guard let code = Int(exactly: value) else { throw .decoding }
+        return code
     }
 
     private static func instant(_ value: Double?) -> Date? {

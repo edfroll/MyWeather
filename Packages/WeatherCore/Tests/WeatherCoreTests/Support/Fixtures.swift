@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import WeatherCore
+import WeatherCore
 
 enum Fixture {
     static func data(_ name: String) throws -> Data {
@@ -43,9 +43,6 @@ actor CallLog {
     }
 }
 
-func httpResponse(_ status: Int, url: URL = URL(fileURLWithPath: "/")) -> HTTPURLResponse {
-    guard let response = HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil) else {
-        preconditionFailure("HTTPURLResponse must build for a valid status code")
-    }
-    return response
+func httpResponse(_ status: Int, url: URL = URL(fileURLWithPath: "/")) throws -> HTTPURLResponse {
+    try #require(HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil))
 }
