@@ -17,6 +17,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The SwiftLint version is pinned by the image tag; change it together with the local check (MW-62).
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    container: ghcr.io/realm/swiftlint:0.65.1
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: SwiftLint
+        run: |
+          swiftlint version
+          swiftlint lint --strict --reporter github-actions-logging
+
   test:
     runs-on: xcode-27
     timeout-minutes: 30
@@ -38,14 +51,6 @@ jobs:
           fi
           sudo xcode-select -s "$XCODE"
           xcodebuild -version
-
-      - name: SwiftLint
-        run: |
-          if ! command -v swiftlint >/dev/null; then
-            brew install swiftlint
-          fi
-          swiftlint version
-          swiftlint lint --strict --reporter github-actions-logging
 
       - name: WeatherCore package tests
         run: |

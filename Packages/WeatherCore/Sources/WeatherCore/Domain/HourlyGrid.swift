@@ -34,7 +34,10 @@ public struct HourlyGrid: Sendable, Equatable {
               Set(lhs.values.keys) == Set(rhs.values.keys) else { return false }
         for (metric, left) in lhs.values {
             guard let right = rhs.values[metric] else { return false }
-            for (a, b) in zip(left, right) where !(a == b || (a.isNaN && b.isNaN)) { return false }
+            for (lhsValue, rhsValue) in zip(left, right)
+            where !(lhsValue == rhsValue || (lhsValue.isNaN && rhsValue.isNaN)) {
+                return false
+            }
         }
         return true
     }
