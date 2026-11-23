@@ -17,7 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # The SwiftLint version is pinned by the image tag; change it together with the local check (MW-62).
+  # The SwiftLint version is pinned by the image tag. Lint locally with the same version (portable_swiftlint.zip from
+  # the realm/SwiftLint release) before pushing (MW-62).
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
