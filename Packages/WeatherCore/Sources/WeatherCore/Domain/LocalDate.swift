@@ -12,7 +12,8 @@ public struct LocalDate: Sendable, Hashable, Comparable {
         self.day = day
     }
 
-    /// The day containing `instant` in `timeZone` (Gregorian calendar with that time zone, not Calendar.current — A-48).
+    /// The day containing `instant` in `timeZone` (Gregorian calendar with that time zone,
+    /// not Calendar.current — A-48).
     public init(_ instant: Date, in timeZone: TimeZone) {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone

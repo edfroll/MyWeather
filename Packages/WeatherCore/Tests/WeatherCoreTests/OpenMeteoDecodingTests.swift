@@ -72,15 +72,17 @@ struct OpenMeteoDecodingTests {
 
     // MARK: - Synthetic bodies
 
-    private func uvBody(time: String = "[0,3600]", uv: String = "[1,2]", tz: String = "\"UTC\"") -> Data {
-        Data("{\"timezone\":\(tz),\"utc_offset_seconds\":0,\"hourly\":{\"time\":\(time),\"uv_index\":\(uv)}}".utf8)
+    private func uvBody(time: String = "[0,3600]", uvIndex: String = "[1,2]", timeZone: String = "\"UTC\"") -> Data {
+        let hourly = "{\"time\":\(time),\"uv_index\":\(uvIndex)}"
+        return Data("{\"timezone\":\(timeZone),\"utc_offset_seconds\":0,\"hourly\":\(hourly)}".utf8)
     }
 
-    private func forecastBody(is_day: String = "[1,0]", daily: String? = nil) -> Data {
+    private func forecastBody(isDay: String = "[1,0]", daily: String? = nil) -> Data {
         var columns = Metric.allCases.map { "\"\($0.apiName)\":[1,2]" }
         columns.append("\"weather_code\":[1,2]")
-        columns.append("\"is_day\":\(is_day)")
-        var body = "{\"timezone\":\"UTC\",\"utc_offset_seconds\":0,\"hourly\":{\"time\":[0,3600],\(columns.joined(separator: ","))}"
+        columns.append("\"is_day\":\(isDay)")
+        let hourly = "{\"time\":[0,3600],\(columns.joined(separator: ","))}"
+        var body = "{\"timezone\":\"UTC\",\"utc_offset_seconds\":0,\"hourly\":\(hourly)"
         if let daily { body += ",\"daily\":\(daily)" }
         body += "}"
         return Data(body.utf8)
@@ -98,14 +100,20 @@ struct OpenMeteoDecodingTests {
 
     @Test func syntheticBrokenBodies() {
         #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeHistoricalUV(uvBody(time: "[0,1800]")) }
-        #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeHistoricalUV(uvBody(uv: "[1]")) }
+        #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeHistoricalUV(uvBody(uvIndex: "[1]")) }
         #expect(throws: WeatherError.decoding) {
             try OpenMeteoDecoding.decodeHistoricalUV(Data(#"{"timezone":"UTC","hourly":{"time":[0]}}"#.utf8))
         }
-        #expect(throws: WeatherError.noData) { try OpenMeteoDecoding.decodeHistoricalUV(uvBody(time: "[]", uv: "[]")) }
-        #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeHistoricalUV(uvBody(tz: "\"Mars/Olympus\"")) }
+        #expect(throws: WeatherError.noData) {
+            try OpenMeteoDecoding.decodeHistoricalUV(uvBody(time: "[]", uvIndex: "[]"))
+        }
+        #expect(throws: WeatherError.decoding) {
+            try OpenMeteoDecoding.decodeHistoricalUV(uvBody(timeZone: "\"Mars/Olympus\""))
+        }
         #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeHistoricalUV(Data("not json".utf8)) }
-        #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeForecast(forecastBody(is_day: "[2,0]", daily: dailyOK)) }
+        #expect(throws: WeatherError.decoding) {
+            try OpenMeteoDecoding.decodeForecast(forecastBody(isDay: "[2,0]", daily: dailyOK))
+        }
         #expect(throws: WeatherError.decoding) { try OpenMeteoDecoding.decodeForecast(forecastBody()) }
     }
 

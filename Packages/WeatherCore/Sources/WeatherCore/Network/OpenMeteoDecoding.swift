@@ -3,6 +3,7 @@ import Foundation
 /// One shape for all responses (D-9); never leaves this file.
 private struct ResponseDTO: Decodable {
     let timezone: String?
+    // swiftlint:disable:next identifier_name - wire name of the Open-Meteo field, decoded without CodingKeys
     let utc_offset_seconds: Int?
     let hourly: [String: [Double?]]?
     let daily: [String: [Double?]]?
@@ -26,8 +27,9 @@ package enum OpenMeteoDecoding {
             default: throw .decoding
             }
         }
-        let daily = try dailyColumns(of: dto, expected: ["weather_code", "sunrise", "sunset",
-                                                          "temperature_2m_max", "temperature_2m_min"])
+        let daily = try dailyColumns(of: dto, expected: [
+            "weather_code", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min",
+        ])
         let codeColumn = try daily.columns["weather_code"].unwrapped()
         let sunriseColumn = try daily.columns["sunrise"].unwrapped()
         let sunsetColumn = try daily.columns["sunset"].unwrapped()

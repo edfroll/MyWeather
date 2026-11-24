@@ -15,5 +15,4 @@ struct MyWeatherTests {
         // Swift Testing Documentation
         // https://developer.apple.com/documentation/testing
     }
-
 }

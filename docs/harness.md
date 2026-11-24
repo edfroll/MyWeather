@@ -166,6 +166,8 @@ PR вливается сам, когда CI зелёный, треды закр�
 - Squash и merge commits включены, rebase выключен; Allow auto-merge; ветки после merge удаляются.
 - Check `test` (`.github/workflows/ci.yml`) обязателен в обоих ruleset'ах — сделано Edward 06.11.2026 после MW-11
   (заметки пилота п. 13).
+- Check `lint` (тот же workflow) обязателен в обоих ruleset'ах — сделано Edward 23.11.2026 (MW-62): на нём держится
+  проверка глушителей A-39 и стиля.
 - GitHub for Atlassian подключён к `edfroll/MyWeather`: ветки, коммиты и PR с ключом `MW-n` видны в тикете.
 
 ## 4. Jira **[Edward]**

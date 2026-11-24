@@ -1,8 +1,35 @@
-# Compiler silencers are not used (A-39). Only these rules; style is not linted.
-only_rules:
+# Compiler silencers are not used (A-39): force_unwrapping, force_try, force_cast.
+# Default rules plus the opt-in set below; analyzer rules are not enabled (they need a compile).
+opt_in_rules:
   - force_unwrapping
-  - force_try
-  - force_cast
+  - closure_spacing
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - explicit_init
+  - first_where
+  - last_where
+  - sorted_first_last
+  - modifier_order
+  - operator_usage_whitespace
+  - private_swiftui_state
+  - redundant_nil_coalescing
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_closing_braces
+  - yoda_condition
+
+trailing_comma:
+  # Multi-line literals keep the trailing comma (smaller diffs).
+  mandatory_comma: true
+
+identifier_name:
+  # Language codes of the Open-Meteo geocoding API.
+  excluded: [ru, en]
+
+line_length:
+  warning: 120
+  error: 160
 
 included:
   - MyWeather

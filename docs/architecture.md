@@ -674,7 +674,8 @@ Swift 6). Сверено под Swift 6.4 на Mac, MW-30 (§12 риск 5). П�
 **Почему не:** каждый глушитель на CoreLocation или SwiftData — ровно то место, которое акцент №2 должен показать
 решённым.
 **Основание:** P8; research §4.7 п. 1, §8 п. 6.
-**Как проверяется:** SwiftLint (`force_unwrapping`, `force_try`, `force_cast`) + `grep` в ревью.
+**Как проверяется:** SwiftLint (`force_unwrapping`, `force_try`, `force_cast`) + `grep` в ревью. Стиль — отдельный
+job `lint` (MW-62).
 **Пометка:** [сам: P8]
 
 ---

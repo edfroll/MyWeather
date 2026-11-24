@@ -29,7 +29,9 @@ package struct OpenMeteoRequest: Sendable, Hashable {
     }
 
     package static let forecastHourly: [Metric] = Metric.allCases
-    package static let archiveHourly: [Metric] = Metric.allCases.filter { $0 != .precipitationProbability && $0 != .uvIndex }
+    package static let archiveHourly: [Metric] = Metric.allCases.filter {
+        $0 != .precipitationProbability && $0 != .uvIndex
+    }
 
     package static func forecast(at coordinate: Coordinate) -> OpenMeteoRequest {
         let hourly = (forecastHourly.map(\.apiName) + ["weather_code", "is_day"]).joined(separator: ",")

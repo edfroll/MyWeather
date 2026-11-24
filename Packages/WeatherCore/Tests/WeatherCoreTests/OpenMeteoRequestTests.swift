@@ -54,8 +54,10 @@ struct OpenMeteoRequestTests {
     @Test func archiveEndDateAuckland() throws {
         let now = Date(timeIntervalSince1970: 1_794_504_285) // 2026-11-12T17:24:45Z
         let zone = try #require(TimeZone(identifier: "Pacific/Auckland"))
-        #expect(HistorySource.archive.latestEndDate(now: now, timeZone: zone) == LocalDate(year: 2026, month: 11, day: 12))
-        #expect(HistorySource.historicalUV.latestEndDate(now: now, timeZone: zone) == LocalDate(year: 2026, month: 11, day: 13))
+        let archiveEnd = HistorySource.archive.latestEndDate(now: now, timeZone: zone)
+        let uvEnd = HistorySource.historicalUV.latestEndDate(now: now, timeZone: zone)
+        #expect(archiveEnd == LocalDate(year: 2026, month: 11, day: 12))
+        #expect(uvEnd == LocalDate(year: 2026, month: 11, day: 13))
     }
 
     @Test func endDateNewYorkEvening() throws {
