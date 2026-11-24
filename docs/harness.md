@@ -451,6 +451,24 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 - **Новый клон или worktree «not trusted»,** пока его не открыли интерактивно: headless `claude -p` игнорирует
   `permissions.allow` проекта. Хуки работают и без этого.
 
+#### git-хук pre-push (MW-63)
+
+`.githooks/pre-push` запускает `swiftlint lint --strict --quiet` из корня репозитория — те же правила, что в CI-джобе
+`lint` (MW-62) — и отбивает push при нарушении. Версия сверяется с `EXPECTED_VERSION` (0.65.1; менять вместе с тегом
+образа в `ci.yml`): при расхождении хук предупреждает, но не блокирует. Без swiftlint хук предупреждает и пропускает push
+(CI всё равно линтит).
+
+- **Где действует.** Mac: любой push из клона и из его worktree, в том числе из RC, стартовавшей вне клона.
+- **Где нет.** Облако: нет swiftlint и `core.hooksPath`. Push через GitHub MCP. `git push --no-verify`. Worktree ветки
+  без `.githooks/` — хук молча не работает.
+- **Разовая настройка на Mac:** в основном клоне `git config core.hooksPath .githooks` (конфиг общий для всех worktree).
+- **swiftlint 0.65.1 на Mac:** `brew upgrade swiftlint` (0.63.2 → 0.65.1, bottle), путь `/opt/homebrew/bin/swiftlint`
+  (symlink на `/opt/homebrew/Cellar/swiftlint/0.65.1/bin/swiftlint`).
+  Версия закреплена `brew pin swiftlint` (общий `brew upgrade` её не поднимет). При смене тега образа и
+  `EXPECTED_VERSION`: `brew unpin swiftlint && brew upgrade swiftlint && brew pin swiftlint` до нужной версии.
+- **Граница.** Линт идёт по рабочему дереву, а не по пушимому коммиту: незакоммиченные правки могут как скрыть, так и
+  вызвать нарушение.
+
 ## 8. Лимиты Pro **[Edward]**
 
 Перед каждым новым этапом (новый тред, запуск RC) координатор проверяет лимиты. При **50% пятичасового окна** —

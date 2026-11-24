@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # The SwiftLint version is pinned by the image tag. Lint locally with the same version (portable_swiftlint.zip from
-  # the realm/SwiftLint release) before pushing (MW-62).
+  # The SwiftLint version is pinned by the image tag. Locally the pre-push hook lints with the same version
+  # (.githooks/pre-push, harness §7.2). Change the tag together with EXPECTED_VERSION there (MW-63).
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
