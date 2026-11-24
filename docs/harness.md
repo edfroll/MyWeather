@@ -464,6 +464,8 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 - **Разовая настройка на Mac:** в основном клоне `git config core.hooksPath .githooks` (конфиг общий для всех worktree).
 - **swiftlint 0.65.1 на Mac:** `brew upgrade swiftlint` (0.63.2 → 0.65.1, bottle), путь `/opt/homebrew/bin/swiftlint`
   (symlink на `/opt/homebrew/Cellar/swiftlint/0.65.1/bin/swiftlint`).
+  Версия закреплена `brew pin swiftlint` (общий `brew upgrade` её не поднимет). При смене тега образа и
+  `EXPECTED_VERSION`: `brew unpin swiftlint && brew upgrade swiftlint && brew pin swiftlint` до нужной версии.
 - **Граница.** Линт идёт по рабочему дереву, а не по пушимому коммиту: незакоммиченные правки могут как скрыть, так и
   вызвать нарушение.
 
