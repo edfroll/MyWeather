@@ -1,0 +1,25 @@
+#!/bin/sh
+# Runs SwiftLint with the same rules as the CI job `lint` before a push.
+# Without swiftlint (cloud threads) the hook warns and lets the push through: CI still lints.
+# Bypass once: git push --no-verify.
+
+EXPECTED_VERSION="0.65.1" # keep in sync with the image tag in .github/workflows/ci.yml
+
+# Non-interactive shells (Remote Control) may lack Homebrew in PATH.
+PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+
+if ! command -v swiftlint >/dev/null 2>&1; then
+    echo "pre-push: swiftlint not found, lint skipped (CI job lint still runs)" >&2
+    exit 0
+fi
+
+version=$(swiftlint version 2>/dev/null)
+if [ "$version" != "$EXPECTED_VERSION" ]; then
+    echo "pre-push: swiftlint $version, CI uses $EXPECTED_VERSION; results may differ" >&2
+fi
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+if ! swiftlint lint --strict --quiet; then
+    echo "pre-push: SwiftLint failed, push aborted (fix, or bypass with --no-verify)" >&2
+    exit 1
+fi
