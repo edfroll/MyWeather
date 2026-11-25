@@ -21,7 +21,7 @@
 | Разрешения | `.claude/settings.json` | v2 (§7) |
 | Хуки | `.claude/settings.json` + `.claude/hooks/` | ⚠️ скрипты ✅ 06.11.2026 (MW-10); не грузятся в облачном треде и в RC вне клона, §7.2 |
 | Project instructions | настройки проекта claude.ai | Edward, по §1.3 |
-| Jira MW | `myweather.atlassian.net` | схема — Edward, §4 |
+| Jira MW | `edfroll.atlassian.net` | схема — Edward, §4 |
 | GitHub | настройки репозитория | Edward, §3.4 |
 
 ## 1. Среда: Project в claude.ai/code
@@ -172,19 +172,24 @@ PR вливается сам, когда CI зелёный, треды закр�
 
 ## 4. Jira **[Edward]**
 
+Сайт — `edfroll.atlassian.net`, cloudId `61bd440d-a559-4cd5-b2d4-ebd023d51960`, проект MW (id 10003). До 24.11.2026
+проект жил на `myweather.atlassian.net` и перенесён Atlassian cloud-to-cloud: ключи, переходы, поля, спринты,
+комментарии сохранились; сменились id статусов, полей, доски и спринтов (ниже — новые). Ссылки между тикетами
+(issuelinks) после переноса пусты.
+
 ### 4.1 Статусы
 
 | Статус | id статуса | id перехода | Значит | Кто переводит |
 |---|---|---|---|---|
-| To Do | 10000 | 7 | готов к работе | координатор, Edward |
-| In Progress | 10001 | 21 | тред взял тикет | тред тикета |
-| Blocked | 10008 | 2 | ждёт решения или внешнего; комментарий с вопросом | любой тред |
-| Code Review | 10003 | 31 | PR открыт; замечания чинятся в этом же PR, тикет колонку не покидает | тред тикета |
-| Merged | 10009 | 3 | PR влит в `develop` | тред тикета (видит merge по подписке на PR) |
-| Ready for Edward | 10010 | 6 | ждёт ручной проверки Edward; если в пачке есть изменения приложения — пора собрать билд `develop` (один на пачку) | координатор, пачкой (ниже), с уведомлением Edward |
-| Verified | 10012 | 5 | Edward проверил | агент, по слову Edward |
-| Rejected | 10011 | 4 | Edward забраковал; затем → To Do с комментарием, повторный цикл (ниже) | агент, по слову Edward |
-| Done | 10002 | 41 | дошёл до `main` релизом | агент, после релиза |
+| To Do | 10013 | 7 | готов к работе | координатор, Edward |
+| In Progress | 10014 | 21 | тред взял тикет | тред тикета |
+| Blocked | 10017 | 2 | ждёт решения или внешнего; комментарий с вопросом | любой тред |
+| Code Review | 10016 | 31 | PR открыт; замечания чинятся в этом же PR, тикет колонку не покидает | тред тикета |
+| Merged | 10018 | 3 | PR влит в `develop` | тред тикета (видит merge по подписке на PR) |
+| Ready for Edward | 10019 | 6 | ждёт ручной проверки Edward; если в пачке есть изменения приложения — пора собрать билд `develop` (один на пачку) | координатор, пачкой (ниже), с уведомлением Edward |
+| Verified | 10021 | 5 | Edward проверил | агент, по слову Edward |
+| Rejected | 10020 | 4 | Edward забраковал; затем → To Do с комментарием, повторный цикл (ниже) | агент, по слову Edward |
+| Done | 10015 | 41 | дошёл до `main` релизом | агент, после релиза |
 
 **Правило доски — справа налево.** Чем правее колонка, тем важнее протолкнуть тикет. Сначала то, что застряло в
 Code Review, затем Rejected, затем To Do. Внутри To Do следующий тикет — верхний по рангу (порядок карточек).
@@ -222,8 +227,8 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 
 | Поле | id | Значения | Для чего |
 |---|---|---|---|
-| Class | `customfield_10044` | minor / small / standard / large | конвейер и точки Edward (§5) |
-| Runs on | `customfield_10045` | cloud / Mac | где исполнять |
+| Class | `customfield_10049` | minor / small / standard / large | конвейер и точки Edward (§5) |
+| Runs on | `customfield_10050` | cloud / Mac | где исполнять |
 
 Выпадающие списки у Task, Bug, Chore, в макете сразу под статусом. Системное поле «Среда» (`environment`) не
 используем. Имена типов в вызовах API — английские (ccm, шаг 4).
@@ -267,7 +272,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 и списком тикетов (тикеты переносятся в спринт); `createJiraIssue` с `assignToSprint` кладёт новый тикет в спринт.
 `close` проверен 07.11.2026 при закрытии MW Спринт 1, `create` — при создании MW Спринт 2. ❓ `update` — при первой
 надобности.
-Доска MW board (id 1) — колонки совпадают с §4.1.
+Доска MW board (id 4) — колонки совпадают с §4.1.
 
 ## 5. Классы и конвейер **[Edward]**
 
@@ -417,7 +422,7 @@ Epic, Task, Bug, Chore. Chore — техдолг и рефакторинг; Bug 
 
 | Хук | Срабатывает на | Пропускает |
 |---|---|---|
-| `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9` или хост `myweather.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW` (`project.key` или `project.id` `10000`); JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей, без `OR` на верхнем уровне (внутри скобок можно). Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
+| `jira_scope.py` | любой инструмент `mcp__*Atlassian*` (оба префикса §7.1) | `cloudId` — `61bd440d-a559-4cd5-b2d4-ebd023d51960` или хост `edfroll.atlassian.net`; ключи задач только `MW-n` (числовой id задачи не принимается); проект только `MW` (`project.key` или `project.id` `10003`); JQL — с `project = MW` (или `in (MW)`) либо с ключами `MW-n`, без других проектов и ключей, без `OR` на верхнем уровне (внутри скобок можно). Поля ищутся и во вложенных `inputs` у `execute*`. Вызовы без `cloudId` (`getAccessibleAtlassianResources`, `atlassianUserInfo`) проходят |
 | `commit_guard.py` | `Bash` с `git commit` (в том числе за `env`, `command`, путём к git, внутри `bash -c`); трейлеры — и в `merge`, `cherry-pick`, `revert`, `tag`; GitHub MCP `push_files`, `create_or_update_file`, `delete_file`, `merge_pull_request` | автор коммита — только `168742523+edfroll@users.noreply.github.com` (`--author`, `GIT_AUTHOR_EMAIL=` в команде, `git -c user.email=`, иначе `git var GIT_AUTHOR_IDENT`; для `--amend` без `--reset-author` — автор исходного коммита); в сообщении нет `Co-Authored-By: Claude`, `Co-Authored-By: …noreply@anthropic.com`, `Claude-Session:`, «Generated with/by Claude Code», ссылок `claude.ai/code/session_`. Сообщение берётся из текста команды (`-m`, heredoc) и из файла `-F` |
 
 - Тесты: `python3 .claude/hooks/tests/test_hooks.py` — подают хукам JSON так же, как Claude Code, и проверяют

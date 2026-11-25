@@ -52,7 +52,7 @@ Swift 6 strict concurrency на CoreLocation, двухслойный кэш с �
 
 ## Jira
 
-- Только `myweather.atlassian.net` (cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9`), проект **MW**.
+- Только `edfroll.atlassian.net` (cloudId `61bd440d-a559-4cd5-b2d4-ebd023d51960`), проект **MW**. До 24.11.2026 — `myweather.atlassian.net` (перенесён, harness §4).
 - Другие сайты Atlassian не читать и не писать, даже если коннектор их видит.
 - Статусы, типы, поля, спринты и правило «справа налево» — harness §4.
 - Комментарии, переходы и правки своих тикетов — без вопроса. Создание тикета — с согласия Edward
