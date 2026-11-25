@@ -81,11 +81,11 @@ disable-model-invocation: true
 
 ### Все роли
 
-- Jira — только `myweather.atlassian.net` (cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9`), проект MW (`CLAUDE.md`).
+- Jira — только `edfroll.atlassian.net` (cloudId `61bd440d-a559-4cd5-b2d4-ebd023d51960`), проект MW (`CLAUDE.md`).
   Комментарии в тикете — без вопроса. Статус тикета ведёт тред тикета (harness §4.1); сам researcher переводит
   только в Blocked.
 - Переход — по `transitionId` из `listJiraIssueTransitions`: он не равен id статуса из harness §4.1 (на 29.10.2026
-  переход в Blocked — `2`, статус Blocked — `10008`). Целевой статус сверяй по полю `to`.
+  переход в Blocked — `2`, статус Blocked — `10017`). Целевой статус сверяй по полю `to`.
 - Сырые пятна в контексте тикета (тикет расходится с `docs/`, не хватает решения) — комментарий в тикете и
   сообщение координатору, тикет → Blocked. Не додумывать.
 
@@ -93,7 +93,7 @@ disable-model-invocation: true
 
 - Облачный тред, Opus 5.5 (harness §1.2, §5.1). Обязателен для large; в остальных классах — по запросу треда
   тикета, координатора или Edward (harness §5).
-- Тикет `MW-n` (шаблон описания — harness §4.4; поля `Class` `customfield_10044`, `Runs on` `customfield_10045` —
+- Тикет `MW-n` (шаблон описания — harness §4.4; поля `Class` `customfield_10049`, `Runs on` `customfield_10050` —
   harness §4.3) и вопросы, с которыми тебя позвали. Вопросов нет — вопрос один: что должно получиться по тикету и
   чего для этого не хватает.
 
@@ -120,7 +120,7 @@ disable-model-invocation: true
 
 - **Оценка** в «Сводке для Edward» — в шкале `Class`: minor / small / standard / large (harness §5). Расходится
   с `Class` тикета — это замечание к источнику.
-- **Источник** в «Постановке для архитектора» — тикет полным URL: `https://myweather.atlassian.net/browse/MW-n`.
+- **Источник** в «Постановке для архитектора» — тикет полным URL: `https://edfroll.atlassian.net/browse/MW-n`.
 - «Сводка для Edward» — сообщением в треде. «Постановка для архитектора» — `docs/research/MW-n.md`: спеки
   `docs/tasks/MW-n.md` до архитектора ещё нет (harness §6.1). **[открыто]** как файл попадает в репозиторий —
   своя ветка и PR или ветка тикета — harness не определяет.
