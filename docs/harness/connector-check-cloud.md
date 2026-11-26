@@ -2,6 +2,9 @@
 
 Дата: 2026-10-14. Среда: облачная сессия Claude Code (репозиторий edfroll/MyWeather, ветка `claude/new-session-fd2azh`).
 Сайт: `myweather.atlassian.net`, cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9`, проект MW.
+
+> Исторический отчёт: проверка шла на старом сайте. С 24.11.2026 проект MW — на `edfroll.atlassian.net` (harness §4), id из отчёта устарели.
+
 Тестовая задача: **MW-2** `harness: connector check (cloud)`, метка `harness-test` → `harness-test-done`, финальный статус «Готово».
 
 ## Таблица результатов

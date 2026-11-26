@@ -2,6 +2,9 @@
 
 Дата: 2026-10-14. Среда: локальная сессия Claude Code на Mac (Desktop, папка MyWeather), Remote Control включён.
 Сайт: `myweather.atlassian.net`, cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9`, проект MW.
+
+> Исторический отчёт: проверка шла на старом сайте. С 24.11.2026 проект MW — на `edfroll.atlassian.net` (harness §4), id из отчёта устарели.
+
 Тестовая задача: **MW-3** `harness: connector check (mac)`, метка `harness-test` → `harness-test-done`, финальный статус «Готово».
 Облачный прогон для сравнения — `connector-check-cloud.md`.
 

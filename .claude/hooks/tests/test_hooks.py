@@ -14,7 +14,7 @@ import unittest
 HOOKS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JIRA = os.path.join(HOOKS, "jira_scope.py")
 COMMIT = os.path.join(HOOKS, "commit_guard.py")
-CLOUD = "7d0914d2-a05e-48d3-a0e5-46fe9e3870b9"
+CLOUD = "61bd440d-a559-4cd5-b2d4-ebd023d51960"
 GOOD = "168742523+edfroll@users.noreply.github.com"
 LEGACY = "edvard.froll@gmail.com"  # pre-MW-14 author, no longer allowed
 
@@ -46,9 +46,9 @@ class JiraScope(unittest.TestCase):
 
     def test_site_host_and_url_pass(self):
         self.assertAllowed("mcp__Atlassian_MCP__getJiraIssue",
-                           {"cloudId": "myweather.atlassian.net", "issueIdOrKey": "MW-1"})
+                           {"cloudId": "edfroll.atlassian.net", "issueIdOrKey": "MW-1"})
         self.assertAllowed("mcp__Atlassian_MCP__getJiraIssue",
-                           {"cloudId": CLOUD, "issueIdOrKey": "https://myweather.atlassian.net/browse/MW-3"})
+                           {"cloudId": CLOUD, "issueIdOrKey": "https://edfroll.atlassian.net/browse/MW-3"})
 
     def test_calls_without_site_pass(self):
         self.assertAllowed("mcp__Atlassian_MCP__getAccessibleAtlassianResources", {})
@@ -91,7 +91,7 @@ class JiraScope(unittest.TestCase):
         self.assertBlocked("mcp__Atlassian_MCP__createJiraIssue",
                            {"cloudId": CLOUD, "fields": {"project": {"id": "10001"}}})
         self.assertAllowed("mcp__Atlassian_MCP__createJiraIssue",
-                           {"cloudId": CLOUD, "fields": {"project": {"id": "10000"}}})
+                           {"cloudId": CLOUD, "fields": {"project": {"id": "10003"}}})
 
     def test_jql(self):
         tool = "mcp__Atlassian_MCP__searchJiraIssuesUsingJql"

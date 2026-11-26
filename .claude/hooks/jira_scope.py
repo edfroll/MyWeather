@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """PreToolUse guard for Atlassian MCP calls (harness §7.2).
 
-Allows a call only when every Atlassian site in it is myweather.atlassian.net
+Allows a call only when every Atlassian site in it is edfroll.atlassian.net
 and every Jira issue or project it names belongs to project MW.
 
 Exit codes follow Claude Code hooks: 0 allows, 2 blocks and shows stderr to
@@ -13,10 +13,10 @@ import re
 import sys
 from urllib.parse import urlparse
 
-CLOUD_ID = "7d0914d2-a05e-48d3-a0e5-46fe9e3870b9"
-SITE_HOST = "myweather.atlassian.net"
+CLOUD_ID = "61bd440d-a559-4cd5-b2d4-ebd023d51960"
+SITE_HOST = "edfroll.atlassian.net"
 PROJECT_KEY = "MW"
-PROJECT_ID = "10000"
+PROJECT_ID = "10003"
 
 TOP_LEVEL_OR = re.compile(r"\bOR\b|\|\|", re.IGNORECASE)
 ISSUE_KEY = re.compile(r"^MW-\d+$")

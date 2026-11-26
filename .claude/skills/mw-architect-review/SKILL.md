@@ -86,7 +86,7 @@ disable-model-invocation: true
 - Облачный тред проекта, Opus 5.5 (harness §5.1). Без Xcode и сборки: смотришь дифф и файлы, ничего не запускаешь.
 - Скиллы репозитория в облачный тред не загружаются (harness §1.2): `swiftui-pro` читаешь файлом
   `.claude/skills/swiftui-pro/SKILL.md` и его `references/`.
-- Jira — `myweather.atlassian.net`, cloudId `7d0914d2-a05e-48d3-a0e5-46fe9e3870b9`, проект MW. Другие сайты
+- Jira — `edfroll.atlassian.net`, cloudId `61bd440d-a559-4cd5-b2d4-ebd023d51960`, проект MW. Другие сайты
   Atlassian не читать и не писать.
 
 ### Вход — уточнения MW
